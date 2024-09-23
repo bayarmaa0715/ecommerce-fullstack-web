@@ -6,6 +6,7 @@ import { FaHeartBroken } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { Button } from "../ui/button";
 import Link from "next/link";
+
 const Header = () => {
   return (
     <div className="bg-black flex justify-between items-center py-3 px-3">
@@ -33,12 +34,17 @@ const Header = () => {
       <div className="flex gap-3 items-center">
         <FaHeartBroken className="text-red-500" />
         <FaShoppingCart className="text-gray-500" />
-        <Button className=" hover:bg-blue-500 border border-blue-500 bg-black text-white rounded-full">
-          Бүртгүүлэх
-        </Button>
-        <Button className="bg-blue-500 text-white rounded-full hover:border hover:border-blue-500">
-          Нэвтрэх
-        </Button>
+        <Link href="/signup">
+          <Button className=" hover:bg-blue-500 border border-blue-500 bg-black text-white rounded-full">
+            Бүртгүүлэх
+          </Button>
+        </Link>
+        <Link href="/login">
+          <Button className="bg-blue-500 text-white rounded-full hover:border hover:border-blue-500">
+            Нэвтрэх
+          </Button>
+        </Link>
+        ß
       </div>
     </div>
   );

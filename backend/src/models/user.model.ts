@@ -1,4 +1,5 @@
 import { model, ObjectId, Schema } from "mongoose";
+const bcrypt = require("bcrypt");
 interface IUser {
   _id: Schema.Types.ObjectId;
   lastname: String;
@@ -54,6 +55,15 @@ const userSchema = new Schema<IUser>({
     default: Date.now,
   },
 });
-
+// pre() middleware ym save hiihiin umnu daraah functioniig ajiluuulaarai gesen utgatai
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    next();
+  } else {
+    const hashedPassword = bcrypt.hashSync(this.password.toString(), 10);
+    this.password = hashedPassword;
+    next();
+  }
+});
 const User = model("user", userSchema);
 export default User;
