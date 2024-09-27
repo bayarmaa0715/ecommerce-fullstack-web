@@ -2,16 +2,38 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+  const router = useRouter();
   const [userData, setUserData] = useState({
     firstname: "",
     email: "",
     password: "",
     repassword: "",
   });
-  const signup = () => {
-    return userData;
+  const signup = async () => {
+    const { firstname, email, password, repassword } = userData;
+    if (password !== repassword) {
+      toast.error("Нууц үг хоорондоо таарахгүй байна.");
+      return;
+    }
+    try {
+      const res = await axios.post("http://localhost:8000/api/v1/auth/signup", {
+        firstname,
+        email,
+        password,
+      });
+      if (res.status === 201) {
+        toast.success("Амжилттай бүртгэлээ");
+        router.push("/login");
+      }
+    } catch (error) {
+      toast.error("Бүртгэл үүсэхэд алдаа гарлаа");
+      console.log("Newtrehed aldaa garlaa", error);
+    }
   };
   return (
     <div className="flex justify-center">
@@ -50,7 +72,10 @@ const Signup = () => {
             return setUserData({ ...userData, repassword: e.target.value });
           }}
         />
-        <Button className=" w-full hover:bg-white border border-blue-500 bg-blue-500 text-black rounded-full">
+        <Button
+          className=" w-full hover:bg-white border border-blue-500 bg-blue-500 text-black rounded-full"
+          onClick={signup}
+        >
           Үүсгэх
         </Button>
 

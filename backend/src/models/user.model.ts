@@ -17,7 +17,7 @@ interface IUser {
 const userSchema = new Schema<IUser>({
   lastname: {
     type: String,
-    required: [true, "Хэрэглэгчийн owogiig заавал оруулна"],
+    // required: [true, "Хэрэглэгчийн owogiig заавал оруулна"],
   },
   firstname: {
     type: String,

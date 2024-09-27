@@ -21,7 +21,10 @@ const Login = () => {
           Нэвтрэх
         </Button>
 
-        <Link href="" className="underline underline-offset-8 text-sm">
+        <Link
+          href="/forgottenPage"
+          className="underline underline-offset-8 text-sm"
+        >
           Нууц үг мартсан
         </Link>
         <Link href="/signup" className="w-full">
