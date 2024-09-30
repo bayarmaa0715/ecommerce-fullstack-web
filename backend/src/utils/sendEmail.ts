@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-export const sentEmail = async (email: string, otp: string) => {
+export const sendEmail = async (email: string, otp: string) => {
   return await transporter.sendMail({
     from: "bayrmaa.m49@gmail.com", // sender address
     to: email, // list of receivers

@@ -5,7 +5,7 @@ import { connectDB } from "./config/db";
 import categoryRoute from "./routes/category-router";
 
 import cors from "cors";
-import { sentEmail } from "./utils/sendEmail";
+import { sendEmail } from "./utils/sendEmail";
 
 dotenv.config();
 const PORT: string = process.env.PORT || "port error";
@@ -25,7 +25,7 @@ app.get("/", async (req: Request, res: Response) => {
     .padStart(4, "0");
   console.log("too", randomOTP);
   const sendEMAIL = "oojgii0118@gmail.com";
-  // sentEmail(sendEMAIL, randomOTP);
+  // sendEmail(sendEMAIL, randomOTP);
   res.send("Welcome ecommerce api server");
 });
 connectDB(MONGO_URI);
