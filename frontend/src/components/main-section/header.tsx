@@ -1,13 +1,16 @@
 "use client";
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Input } from "../ui/input";
 import { IoSearch } from "react-icons/io5";
 import { FaHeartBroken } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
+import { IoPersonCircleSharp } from "react-icons/io5";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { UserContext } from "@/context/user";
 
 const Header = () => {
+  const { user } = useContext(UserContext);
   return (
     <div className="bg-black flex justify-between items-center py-3 px-3">
       <div className="flex gap-3">
@@ -34,17 +37,23 @@ const Header = () => {
       <div className="flex gap-3 items-center">
         <FaHeartBroken className="text-red-500" />
         <FaShoppingCart className="text-gray-500" />
-        <Link href="/signup">
-          <Button className=" hover:bg-blue-500 border border-blue-500 bg-black text-white rounded-full">
-            Бүртгүүлэх
-          </Button>
-        </Link>
-        <Link href="/login">
-          <Button className="bg-blue-500 text-white rounded-full hover:border hover:border-blue-500">
-            Нэвтрэх
-          </Button>
-        </Link>
-        ß
+        {user ? (
+          <>
+            {" "}
+            <Link href="/signup">
+              <Button className=" hover:bg-blue-500 border border-blue-500 bg-black text-white rounded-full">
+                Бүртгүүлэх
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button className="bg-blue-500 text-white rounded-full hover:border hover:border-blue-500">
+                Нэвтрэх
+              </Button>
+            </Link>
+          </>
+        ) : (
+          <IoPersonCircleSharp className="text-gray-500" />
+        )}
       </div>
     </div>
   );
