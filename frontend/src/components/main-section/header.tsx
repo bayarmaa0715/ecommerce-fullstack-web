@@ -36,7 +36,10 @@ const Header = () => {
       </div>
       <div className="flex gap-3 items-center">
         <FaHeartBroken className="text-red-500" />
-        <FaShoppingCart className="text-gray-500" />
+        <Link href="purchase">
+          <FaShoppingCart className="text-gray-500" />
+        </Link>
+
         {user ? (
           <>
             {" "}
@@ -52,7 +55,11 @@ const Header = () => {
             </Link>
           </>
         ) : (
-          <IoPersonCircleSharp className="text-gray-500" />
+          <div>
+            <Link href="/profilepage">
+              <IoPersonCircleSharp className="text-gray-500" />
+            </Link>
+          </div>
         )}
       </div>
     </div>

@@ -4,7 +4,7 @@ import axios from "axios";
 import Link from "next/link";
 
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { toast, useToast } from "react-toastify";
+import { toast } from "react-toastify";
 
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 
