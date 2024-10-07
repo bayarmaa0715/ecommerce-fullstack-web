@@ -3,9 +3,10 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/main-section/header";
 import Footer from "@/components/main-section/footer";
-
 import "react-toastify/dist/ReactToastify.css";
 import UserProvider from "@/context/user";
+import CategoryProvider from "@/context/category-context";
+import ProductProvider from "@/context/product-context";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -34,9 +35,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <UserProvider>
-          <Header />
-          {children}
-          <Footer />
+          <CategoryProvider>
+            <ProductProvider>
+              <Header />
+              {children}
+              <Footer />
+            </ProductProvider>
+          </CategoryProvider>
         </UserProvider>
       </body>
     </html>

@@ -15,7 +15,7 @@ const Profile = () => {
   };
   return (
     <div className="flex justify-center bg-gray-200 py-24 ">
-      <div className="flex gap-3 w-3/4">
+      <div className="flex gap-3 w-4/4">
         <div className="flex flex-col gap-2 w-1/3 text-start">
           <Button
             className="bg-gray-200 text-start text-black px-5  hover:bg-white hover:rounded-full  focus:bg-white focus:rounded-full "

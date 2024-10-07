@@ -37,6 +37,7 @@ export const login = async (req: Request, res: Response) => {
         .json({ message: "Хэрэглэгчийн имэйл эсвэл пасс буруу байна" });
     } else {
       const token = generateToken({ id: user._id });
+      console.log("first genereta token", token);
       res.status(200).json({ message: "login success", token: token });
     }
   } catch (error) {
@@ -44,9 +45,18 @@ export const login = async (req: Request, res: Response) => {
   }
 };
 export const currentUser = async (req: Request, res: Response) => {
-  const id = req.user;
-  const finUser = await User.findById(id);
-  res.status(200).json({ message: "Success user", user: finUser });
+  try {
+    const { id } = req.user;
+    console.log("id ?", id);
+    const finUser = await User.findById(id);
+    res.status(200).json({ message: "Success user", user: finUser });
+  } catch (error) {
+    console.log("current user erro", error);
+    res.status(400).json({
+      message: "Newtersen hereglegciin medeell tatahad aldaa garlaa",
+      error,
+    });
+  }
 };
 
 export const forgetPassword = async (req: Request, res: Response) => {

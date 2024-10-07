@@ -7,7 +7,11 @@ import { decodeToken } from "../utils/jwt";
 declare global {
   namespace Express {
     interface Request {
-      user: string | object;
+      user: {
+        id: string;
+        iat: number;
+        exp: number;
+      };
     }
   }
 } //global bga inteface oorcloh gej bn
@@ -18,9 +22,11 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
       .status(400)
       .json({ message: "Энэ үйлдэл хийхийг тулд нэвтэрнэ үү" });
   }
-  const token = req.headers.authorization.split("")[1];
-  ``;
+  const token = req.headers.authorization.split(" ")[1];
+  console.log("first", token);
+
   const user = decodeToken(token);
+  console.log("user", user);
   req.user = user;
   next();
 };

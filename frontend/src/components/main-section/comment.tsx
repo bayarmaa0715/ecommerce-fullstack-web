@@ -5,7 +5,7 @@ import { Button } from "../ui/button";
 
 const Comment = () => {
   return (
-    <div className="p-5 w-1/4">
+    <div className="p-5">
       <div className="border-b-2 pb-5">
         <div className=" flex items-center gap-2 text-xl text-yellow-300">
           <p className="text-black text-lg">Saraa</p>

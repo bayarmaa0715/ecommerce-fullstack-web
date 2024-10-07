@@ -28,6 +28,7 @@ const Login = () => {
         toast.success("Ажилттай нэвтэрлээ");
         console.log("Ажилттай нэвтэрлээ");
         const { token } = res.data;
+        console.log("first token", token);
         localStorage.setItem("token", token);
         setToken(token);
 

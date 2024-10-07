@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { IoSearch } from "react-icons/io5";
 import { FaHeartBroken } from "react-icons/fa";
@@ -8,9 +8,19 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { UserContext } from "@/context/user";
+import { CiPower } from "react-icons/ci";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-  const { user } = useContext(UserContext);
+  const router = useRouter();
+  const { user, token } = useContext(UserContext);
+  const signout = () => {
+    localStorage.removeItem("token");
+    router.push("/");
+  };
+  // useEffect(() => {
+
+  // }, []);
   return (
     <div className="bg-black flex justify-between items-center py-3 px-3">
       <div className="flex gap-3">
@@ -40,7 +50,21 @@ const Header = () => {
           <FaShoppingCart className="text-gray-500" />
         </Link>
 
-        {user ? (
+        {token ? (
+          <div className="flex items-center gap-2 text-gray-500">
+            <Link href="/profilepage">
+              <IoPersonCircleSharp />
+            </Link>
+            <p>{user?.firstname}</p>
+            <Button
+              className="bg-black p-0 hover:bg-black text-lg"
+              onClick={signout}
+            >
+              {" "}
+              <CiPower className="text-gray-400 font-extrabold" />
+            </Button>
+          </div>
+        ) : (
           <>
             {" "}
             <Link href="/signup">
@@ -54,12 +78,6 @@ const Header = () => {
               </Button>
             </Link>
           </>
-        ) : (
-          <div>
-            <Link href="/profilepage">
-              <IoPersonCircleSharp className="text-gray-500" />
-            </Link>
-          </div>
         )}
       </div>
     </div>
