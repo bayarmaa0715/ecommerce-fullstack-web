@@ -42,6 +42,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [product, setProduct] = useState<IProduct | null>(null);
   const [like, setLike] = useState(false);
+
   const fetchProductData = async () => {
     try {
       const res = await axios.get("http://localhost:8000/api/v1/products");

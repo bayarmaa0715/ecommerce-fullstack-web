@@ -7,12 +7,14 @@ import Link from "next/link";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
+import { useParams } from "next/navigation";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
   const [count, setcount] = useState(1);
   const { product, like, setLike } = useContext(ProductContext);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+  const { id } = useParams();
 
   const AddCountFunction = () => {
     return setcount(count + 1);

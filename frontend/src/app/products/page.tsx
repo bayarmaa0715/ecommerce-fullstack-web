@@ -11,7 +11,7 @@ const ProductCard = () => {
       <div className="relative">
         <div className="w-full h-[500px]">
           <img
-            src={products[1]?.images[2]}
+            src={products[1]?.images[0]}
             alt=""
             className="size-full object-cover"
           />
