@@ -26,7 +26,7 @@ export const auth = (req: Request, res: Response, next: NextFunction) => {
   console.log("first", token);
 
   const user = decodeToken(token);
-  console.log("user", user);
+
   req.user = user;
   next();
 };

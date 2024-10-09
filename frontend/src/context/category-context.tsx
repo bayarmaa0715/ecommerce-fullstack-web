@@ -39,7 +39,7 @@ const CategoryProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     fetchCategoryData();
   }, []);
-  console.log("Бүх category харах ", category);
+  // console.log("Бүх category харах ", category);
   return (
     <CategoryContext.Provider value={{ category, setCategory }}>
       {children}

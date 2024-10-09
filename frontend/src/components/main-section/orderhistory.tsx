@@ -17,7 +17,6 @@ const OrderHistory = () => {
 
             <FaAngleDown />
           </div>
-
           <div className=" flex gap-3 items-center  w-full">
             <img
               src="/images/img1.png"

@@ -4,6 +4,7 @@ import authRoute from "./routes/auth-router";
 import { connectDB } from "./config/db";
 import categoryRoute from "./routes/category-router";
 import productRoute from "./routes/product-router";
+import purchaseCardRoute from "./routes/purchasecard-route";
 
 import cors from "cors";
 import { sendEmail } from "./utils/sendEmail";
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1", categoryRoute);
 app.use("/api/v1/products", productRoute);
+app.use("/api/v1/purchasecard", purchaseCardRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   const randomOTP = Math.floor(Math.random() * 10000)

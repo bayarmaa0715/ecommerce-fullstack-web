@@ -2,30 +2,21 @@
 
 import { FaHeart, FaRegHeart, FaRegStar } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
 import { useParams } from "next/navigation";
+import Count from "@/components/main-section/count";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
-  const [count, setcount] = useState(1);
   const { product, like, setLike } = useContext(ProductContext);
   const [show, setShow] = useState(false);
   const { id } = useParams();
-
-  const AddCountFunction = () => {
-    return setcount(count + 1);
-  };
-  const MinusCountFunction = () => {
-    if (count <= 1) {
-      return 1;
-    } else {
-      return setcount(count - 1);
-    }
-  };
 
   const showComment = () => {
     if (show === true) {
@@ -43,7 +34,25 @@ const ProductDetail = () => {
     }
   };
 
-  console.log(show);
+  const createCard = async () => {
+    try {
+      const { id } = useParams();
+      const token = localStorage.getItem("token");
+      const res = await axios.post(
+        "http://localhost:8000/api/v1/purchasecard/createdcard",
+        {
+          productId: id,
+          userId: { header: { Authorzition: `Bearer ${token}` } },
+        }
+      );
+      toast.success("Amjilttai sagsallaa");
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    createCard();
+  }, []);
+
   return (
     <div className="flex flex-col gap-10 px-20 py-10  ">
       <div className=" flex gap-10 justify-center p-5 ">
@@ -91,25 +100,14 @@ const ProductDetail = () => {
               ))}
             </ul>
           </div>
-          <div className="flex gap-3  items-center">
-            <Button
-              onClick={MinusCountFunction}
-              className="bg-white text-black rounded-full border"
-            >
-              -
-            </Button>
-            <p>{count}</p>
-            <Button
-              onClick={AddCountFunction}
-              className="bg-white text-black rounded-full border"
-            >
-              +
-            </Button>
-          </div>
+          <Count />
           <p className="font-bold"> {product?.price}$</p>
           <div>
             {" "}
-            <Button className="bg-blue-700 px-10 rounded-full">
+            <Button
+              className="bg-blue-700 px-10 rounded-full"
+              onClick={createCard}
+            >
               Сагсанд нэмэх
             </Button>
           </div>
