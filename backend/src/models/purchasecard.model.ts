@@ -16,9 +16,11 @@ const PurchaseCardSchema = new Schema<IPurchaseCard>({
     {
       product: {
         type: Schema.Types.ObjectId,
-        ref: "User",
+        ref: "Product",
         required: true,
       },
+      quantity: { type: Number, required: true, default: 1 },
+      totalAmount: { type: Number, required: true, default: 0 },
     },
   ],
   totalAmount: {
