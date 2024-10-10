@@ -2,7 +2,12 @@ import { model, Schema } from "mongoose";
 
 interface IPurchaseCard {
   user: Schema.Types.ObjectId;
-  products: [{ product: Schema.Types.ObjectId; quantity: Number }];
+  products: [
+    {
+      product: Schema.Types.ObjectId;
+      quantity: Number;
+    }
+  ];
   totalAmount: Number;
 }
 

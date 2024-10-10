@@ -13,13 +13,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { UserContext } from "@/context/user";
 
+
+
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
   const { product, like, setLike } = useContext(ProductContext);
   const { user } = useContext(UserContext);
   const [show, setShow] = useState(false);
   const { id } = useParams();
-  console.log("user harah===>", user);
+  // console.log("user harah===>", user);
   const showComment = () => {
     if (show === true) {
       setShow(false);
@@ -45,7 +47,7 @@ const ProductDetail = () => {
         "http://localhost:8000/api/v1/purchasecard/createdcard",
         {
           productId: id,
-          userId: user,
+          userId: user
         }
       );
       toast.success("Amjilttai sagsallaa");

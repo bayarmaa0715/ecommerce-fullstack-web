@@ -2,16 +2,21 @@ import React from "react";
 
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
-
+import numeral from "numeral";
+import { IProduct } from "@/app/purchase/page";
 export type CardProps = {
   card: {
     product: { name: string; price: number; images: string[] };
     quantity: number;
+    totalAmount: number;
+    _id: string;
   }[];
   minusCount: (_e: any) => void;
+  addCount: (_e: any) => void;
+  deleteCart: (_e: any) => void;
 };
 
-const Card = ({ card, minusCount }: CardProps) => {
+const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
   return (
     <div className="flex flex-col gap-4">
       <div className=" flex justify-between items-center">
@@ -22,7 +27,7 @@ const Card = ({ card, minusCount }: CardProps) => {
           <div className=" flex gap-3 items-center  w-full">
             <div className="w-16 h-14">
               <img
-                src={e.product.images[1]}
+                src={e.product?.images[1]}
                 alt=""
                 className="w-16 h-14 size-full object-cover rounded-lg "
               />
@@ -30,7 +35,7 @@ const Card = ({ card, minusCount }: CardProps) => {
 
             <div className="flex justify-between  gap-2 items-center w-full">
               <div>
-                <p>{e.product.name}</p>
+                <p>{e.product?.name}</p>
 
                 <div className="flex gap-3  items-center">
                   <Button
@@ -41,15 +46,21 @@ const Card = ({ card, minusCount }: CardProps) => {
                   </Button>
                   <p>{e.quantity}</p>
                   <Button
-                    onClick={() => {}}
+                    onClick={() => {
+                      addCount(e);
+                    }}
                     className="bg-white text-black rounded-full border"
                   >
                     +
                   </Button>
                 </div>
-                <p>{e.product.price * e.quantity}₮</p>
+
+                <p>{numeral(e.product?.price * e.quantity).format("0,0")}₮</p>
               </div>
-              <FaRegTrashAlt />
+              <button onClick={() => deleteCart(e)}>
+                {" "}
+                <FaRegTrashAlt />
+              </button>
             </div>
           </div>
         );
