@@ -31,6 +31,7 @@ const Purchase = () => {
       _id: "",
     },
   ]);
+
   const { user } = useContext(UserContext);
 
   const addCount = (e: IProduct) => {
@@ -62,10 +63,17 @@ const Purchase = () => {
   };
 
   const getCard = async () => {
+    if (!user) return;
+
+    const userId = user?._id;
+    console.log("userId", userId);
     try {
-      const res = await axios.get("http://localhost:8000/api/v1/purchasecard");
+      const res = await axios.get(
+        `http://localhost:8000/api/v1/purchasecard/getCart?userId=${userId}`
+      );
       if (res.status === 200) {
-        setCard(res.data.AllCard[0].products);
+        console.log(res.data.AllCard);
+        setCard(res.data.AllCard.products);
         // console.log("backees irsen cart data", res.data.AllCard[0].products);
       }
     } catch (error) {
@@ -73,17 +81,19 @@ const Purchase = () => {
     }
   };
 
-  const deleteCart = async (e: IProduct) => {
+  const deleteCart = async (productId: string) => {
     try {
+      console.log("productId", productId);
       const userId = user?._id;
-      const cardOneProductId = e?.product._id;
-      console.log("jjjj", cardOneProductId);
+      // const cardOneProductId = e?.product._id;
+      // console.log("e harah", e);
+      console.log("jjjj", userId);
       const res = await axios.delete(
         "http://localhost:8000/api/v1/purchasecard/deletecart",
-        { data: { userId, cardOneProductId } }
+        { data: { userId, cardOneProductId: productId } }
       );
       if (res.status === 200) {
-        setCard(res.data.updatedCard);
+        // setCard(res.data.updatedCard);
         console.log("backees irsen cart data", res.data.updatedCard);
       }
     } catch (error) {
@@ -92,9 +102,8 @@ const Purchase = () => {
   };
 
   useEffect(() => {
-    getCard;
-    deleteCart;
-  }, []);
+    getCard();
+  }, [user]);
 
   const amount = card?.map((e) => {
     return e?.product?.price * e?.quantity;
@@ -111,7 +120,7 @@ const Purchase = () => {
   amount?.forEach((num) => {
     sum += num;
   });
-
+  console.log("card harah", card);
   return (
     <div className="  flex flex-col gap-2 justify-center items-center">
       <div className="bg-white rounded-lg p-3 flex flex-col gap-5  w-1/3">

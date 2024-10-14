@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -6,7 +7,12 @@ import numeral from "numeral";
 import { IProduct } from "@/app/purchase/page";
 export type CardProps = {
   card: {
-    product: { name: string; price: number; images: string[] };
+    product: {
+      _id: string;
+      name: string;
+      price: number;
+      images: string[];
+    };
     quantity: number;
     totalAmount: number;
     _id: string;
@@ -27,7 +33,7 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
           <div className=" flex gap-3 items-center  w-full">
             <div className="w-16 h-14">
               <img
-                src={e.product?.images[1]}
+                src={e?.product?.images[1]}
                 alt=""
                 className="w-16 h-14 size-full object-cover rounded-lg "
               />
@@ -35,7 +41,7 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
 
             <div className="flex justify-between  gap-2 items-center w-full">
               <div>
-                <p>{e.product?.name}</p>
+                <p>{e?.product?.name}</p>
 
                 <div className="flex gap-3  items-center">
                   <Button
@@ -44,7 +50,7 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
                   >
                     -
                   </Button>
-                  <p>{e.quantity}</p>
+                  <p>{e?.quantity}</p>
                   <Button
                     onClick={() => {
                       addCount(e);
@@ -55,10 +61,9 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
                   </Button>
                 </div>
 
-                <p>{numeral(e.product?.price * e.quantity).format("0,0")}₮</p>
+                <p>{numeral(e?.product?.price * e?.quantity).format("0,0")}₮</p>
               </div>
-              <button onClick={() => deleteCart(e)}>
-                {" "}
+              <button onClick={() => deleteCart(e?.product?._id)}>
                 <FaRegTrashAlt />
               </button>
             </div>
