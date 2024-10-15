@@ -5,8 +5,9 @@ interface IProduct {
   discription: string;
   price: number;
   size: string;
-  images: [string];
+  images: string[];
   isNew: boolean;
+  isLike: boolean;
   quantity: number;
   discount: number;
   category: Schema.Types.ObjectId;
@@ -38,6 +39,10 @@ const productSchema = new Schema<IProduct>(
     isNew: {
       type: Boolean,
       default: true,
+    },
+    isLike: {
+      type: Boolean,
+      default: false,
     },
     quantity: {
       type: Number,

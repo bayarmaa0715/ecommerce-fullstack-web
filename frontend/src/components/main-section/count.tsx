@@ -1,17 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "../ui/button";
+import { ProductContext } from "@/context/product-context";
 
 const Count = () => {
-  const [count, setcount] = useState(1);
+  interface IProduct {
+    _id: string;
+    name: string;
+    discription: string;
+    price: number;
+    size: string;
+    images: [string];
+    isNew: boolean;
+    quantity: number;
+    discount: number;
+    category: string;
+    // spancol?: string;
+    // spanrow?: string;
+  }
+
+  // const [] = use
+
+  const { product, setProduct } = useContext(ProductContext);
   const AddCountFunction = () => {
-    return setcount(count + 1);
+    // return setProduct(product);
+    // if (product)
+    return setProduct({ ...product, quantity: product?.quantity + 1 });
   };
   const MinusCountFunction = () => {
-    if (count <= 1) {
+    if (product?.quantity <= 1) {
       return 1;
     } else {
-      return setcount(count - 1);
+      return setProduct({ ...product, quantity: product?.quantity - 1 });
     }
   };
   return (
@@ -22,7 +42,7 @@ const Count = () => {
       >
         -
       </Button>
-      <p>{count}</p>
+      <p>{product?.quantity}</p>
       <Button
         onClick={AddCountFunction}
         className="bg-white text-black rounded-full border"

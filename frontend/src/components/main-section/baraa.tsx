@@ -1,11 +1,12 @@
 "use client";
 import { ProductContext } from "@/context/product-context";
 import Link from "next/link";
+import numeral from "numeral";
 import { useContext } from "react";
 
 const Baraa = () => {
   const { products } = useContext(ProductContext);
-  console.log("Product бүх дата харах bara =====>", products);
+
   return (
     <div className="grid gap-5 grid-cols-4 grid-flow-dense  ">
       {products?.map((product) => {
@@ -19,7 +20,10 @@ const Baraa = () => {
               />
               <div className="flex flex-col items-center ">
                 <p className="text-sm">{product.name}</p>
-                <h1 className="font-bold">{product.price}₮</h1>
+                <h1 className="font-bold">
+                  {" "}
+                  {numeral(product.price).format("0,0")}₮
+                </h1>
               </div>
             </div>
           </Link>

@@ -2,6 +2,7 @@
 
 import { ProductContext } from "@/context/product-context";
 import Link from "next/link";
+import numeral from "numeral";
 import { useContext } from "react";
 
 const ProductCard = () => {
@@ -11,7 +12,7 @@ const ProductCard = () => {
       <div className="relative">
         <div className="w-full h-[500px]">
           <img
-            src={products[1]?.images[0]}
+            src={products[1]?.images[3]}
             alt=""
             className="size-full object-cover"
           />
@@ -19,8 +20,11 @@ const ProductCard = () => {
 
         <div className="absolute left-1/4 bottom-1/4  ">
           {" "}
-          <p>{products[0]?.name}</p>
-          <p className="font-bold">{products[0]?.price}₮</p>
+          <p>{products[1]?.name}</p>
+          <p className="font-bold">
+            {" "}
+            {numeral(products[1]?.price).format("0,0")}₮
+          </p>
         </div>
       </div>
       <div className="px-20 py-20 grid gap-5 grid-cols-4 ">
@@ -36,7 +40,9 @@ const ProductCard = () => {
                 />
                 <div className="flex flex-col items-center ">
                   <p className="text-sm">{pro.name}</p>
-                  <h1 className="font-bold">{pro.price}₮</h1>
+                  <h1 className="font-bold">
+                    {numeral(pro.price).format("0,0")}₮
+                  </h1>
                 </div>
               </div>
             </Link>

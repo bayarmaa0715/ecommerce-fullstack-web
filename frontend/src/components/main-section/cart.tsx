@@ -1,28 +1,15 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
 import numeral from "numeral";
-import { IProduct } from "@/app/purchase/page";
-export type CardProps = {
-  card: {
-    product: {
-      _id: string;
-      name: string;
-      price: number;
-      images: string[];
-    };
-    quantity: number;
-    totalAmount: number;
-    _id: string;
-  }[];
-  minusCount: (_e: any) => void;
-  addCount: (_e: any) => void;
-  deleteCart: (_e: any) => void;
-};
+import { CartContext } from "@/context/cart-context";
 
-const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
+const Card = () => {
+  const { card, setCard, updatedQuantity, deleteCart } =
+    useContext(CartContext);
+
   return (
     <div className="flex flex-col gap-4">
       <div className=" flex justify-between items-center">
@@ -33,7 +20,7 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
           <div className=" flex gap-3 items-center  w-full">
             <div className="w-16 h-14">
               <img
-                src={e?.product?.images[1]}
+                src={e?.product?.images[0]}
                 alt=""
                 className="w-16 h-14 size-full object-cover rounded-lg "
               />
@@ -45,7 +32,12 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
 
                 <div className="flex gap-3  items-center">
                   <Button
-                    onClick={() => minusCount(e)}
+                    onClick={() =>
+                      updatedQuantity(
+                        e?.product?._id,
+                        Math.max(1, e?.quantity - 1)
+                      )
+                    }
                     className="bg-white text-black rounded-full border"
                   >
                     -
@@ -53,7 +45,7 @@ const Card = ({ card, minusCount, addCount, deleteCart }: CardProps) => {
                   <p>{e?.quantity}</p>
                   <Button
                     onClick={() => {
-                      addCount(e);
+                      updatedQuantity(e?.product?._id, e?.quantity + 1);
                     }}
                     className="bg-white text-black rounded-full border"
                   >

@@ -7,6 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import UserProvider from "@/context/user";
 import CategoryProvider from "@/context/category-context";
 import ProductProvider from "@/context/product-context";
+import CartProvider from "@/context/cart-context";
+import { ToastContainer } from "react-toastify";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,9 +39,12 @@ export default function RootLayout({
         <UserProvider>
           <CategoryProvider>
             <ProductProvider>
-              <Header />
-              {children}
-              <Footer />
+              <CartProvider>
+                <Header />
+                {children}
+                <Footer />
+                <ToastContainer />
+              </CartProvider>
             </ProductProvider>
           </CategoryProvider>
         </UserProvider>

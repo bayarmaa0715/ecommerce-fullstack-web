@@ -10,10 +10,15 @@ import Link from "next/link";
 import { UserContext } from "@/context/user";
 import { CiPower } from "react-icons/ci";
 import { useRouter } from "next/navigation";
+import { CartContext } from "@/context/cart-context";
+import { ProductContext } from "@/context/product-context";
 
 const Header = () => {
   const router = useRouter();
   const { user, token } = useContext(UserContext);
+  const { card } = useContext(CartContext);
+
+
   const signout = () => {
     localStorage.removeItem("token");
     router.push("/");
@@ -45,9 +50,18 @@ const Header = () => {
         />
       </div>
       <div className="flex gap-3 items-center">
-        <FaHeartBroken className="text-red-500" />
-        <Link href="purchase">
-          <FaShoppingCart className="text-gray-500" />
+        <Link href="fovarite" className="relative">
+          <FaHeartBroken className="text-red-500 text-lg relative" />
+          <p className="bg-blue-500 rounded-full text-white text-[9px] text-center px-1 py-[0.5px]  absolute top-[-11px] right-[-9px]">
+            {0}
+          </p>
+        </Link>
+
+        <Link href="purchase" className="relative">
+          <FaShoppingCart className="text-gray-500 text-lg  relative" />
+          <p className="bg-blue-500 rounded-full text-white text-[9px] text-center px-1 py-[0.5px]  absolute top-[-11px] right-[-9px]">
+            {card?.length}
+          </p>
         </Link>
 
         {token ? (

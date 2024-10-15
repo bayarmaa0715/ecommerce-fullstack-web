@@ -4,6 +4,7 @@ import PurchaseCard from "../models/purchasecard.model";
 export const createdCard = async (req: Request, res: Response) => {
   // const {id}=req.user
   const { userId, productId, totalAmount, quantity } = req.body;
+  // console.log("Id=======>", userId, productId, totalAmount, quantity);
   try {
     const findUserCard = await PurchaseCard.findOne({ user: userId });
     if (!findUserCard) {
@@ -18,7 +19,7 @@ export const createdCard = async (req: Request, res: Response) => {
     const findDuplicated = findUserCard.products.findIndex(
       (item) => item.product.toString() === productId
     );
-    console.log("findDuplicated========>", findDuplicated);
+    // console.log("findDuplicated========>", findDuplicated);
     if (findDuplicated > -1) {
       findUserCard.products[findDuplicated].quantity += quantity;
     } else {
@@ -97,7 +98,7 @@ export const deleteCard = async (req: Request, res: Response) => {
 };
 
 export const updateData = async (req: Request, res: Response) => {
-  const { userId, productId, quantity } = req.body;
+  const { userId, productId, changedquantity } = req.body;
   try {
     const findUserCard = await PurchaseCard.findOne({ user: userId });
     if (!findUserCard) {
@@ -110,11 +111,17 @@ export const updateData = async (req: Request, res: Response) => {
       return console.log("Уг бараа сагсанд байхгүй байна ");
     }
 
-    const changedquantity = findUserCard.products[findIndex].quantity;
-    const updatedQuantity = await PurchaseCard.find({}).updateOne({
-      quantity: changedquantity,
+    findUserCard.products[findIndex].quantity = changedquantity;
+
+    // const changedquantity = findUserCard.products[findIndex].quantity;
+    // const updatedQuantity = await PurchaseCard.find({}).updateOne({
+    //   quantity: changedquantity,
+    // });
+    const updatedcard = await findUserCard.save();
+    res.status(200).json({
+      message: "Сагсанд дах барааны тоог амжилттай шинэчиллээ",
+      updatedcard,
     });
-    // const updatedcard = await updatedQuantity.save();
   } catch (error) {
     console.log("Cart update aldaa garlaa", error);
     res.status(400).json({ message: "Cart update aldaa garlaa" });

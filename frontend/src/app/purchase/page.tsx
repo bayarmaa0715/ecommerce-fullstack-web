@@ -1,109 +1,30 @@
 "use client";
 
 import Card from "@/components/main-section/cart";
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import numeral from "numeral";
-import { UserContext } from "@/context/user";
-
-export type ICard = [
-  {
-    product: { name: string; price: number; images: string[]; _id: string };
-    quantity: number;
-    totalAmount: number;
-    _id: string;
-  }
-];
-
-export type IProduct = {
-  product: { name: string; price: number; images: string[]; _id: string };
-  quantity: number;
-  totalAmount: number;
-  _id: string;
-};
+import { CartContext } from "@/context/cart-context";
 
 const Purchase = () => {
-  const [card, setCard] = useState([
-    {
-      product: { name: "", price: 0, images: [], _id: "" },
-      quantity: 0,
-      totalAmount: 0,
-      _id: "",
-    },
-  ]);
+  const { card, setCard } = useContext(CartContext);
 
-  const { user } = useContext(UserContext);
-
-  const addCount = (e: IProduct) => {
-    setCard(
-      card.map((pro) => {
-        if (e.product._id === pro.product._id)
-          return { ...pro, quantity: pro.quantity + 1 };
-        return pro;
-      })
-    );
+  const minusCount = () => {
+    // setCard(
+    //   card.map((product) => {
+    //     if (e.product._id === product.product._id) {
+    //       if (e.quantity <= 1) {
+    //         return { ...product, quantity: 1 };
+    //       } else {
+    //         return { ...product, quantity: product.quantity - 1 };
+    //       }
+    //     }
+    //     // return { ...product, quantity: product.quantity - 1};
+    //     // ...[1, 2, 3, 4, 5] => 1, 2, 3, 4, 5
+    //     // ...{key: 'value'} => key: 'value'
+    //     return product;
+    //   })
+    // );
   };
-  const minusCount = (e: IProduct) => {
-    setCard(
-      card.map((product) => {
-        if (e.product._id === product.product._id) {
-          if (e.quantity <= 1) {
-            return { ...product, quantity: 1 };
-          } else {
-            return { ...product, quantity: product.quantity - 1 };
-          }
-        }
-        // return { ...product, quantity: product.quantity - 1};
-
-        // ...[1, 2, 3, 4, 5] => 1, 2, 3, 4, 5
-        // ...{key: 'value'} => key: 'value'
-        return product;
-      })
-    );
-  };
-
-  const getCard = async () => {
-    if (!user) return;
-
-    const userId = user?._id;
-    console.log("userId", userId);
-    try {
-      const res = await axios.get(
-        `http://localhost:8000/api/v1/purchasecard/getCart?userId=${userId}`
-      );
-      if (res.status === 200) {
-        console.log(res.data.AllCard);
-        setCard(res.data.AllCard.products);
-        // console.log("backees irsen cart data", res.data.AllCard[0].products);
-      }
-    } catch (error) {
-      console.log("Backend eed all card iig harahd aldaa garlaa ", error);
-    }
-  };
-
-  const deleteCart = async (productId: string) => {
-    try {
-      console.log("productId", productId);
-      const userId = user?._id;
-      // const cardOneProductId = e?.product._id;
-      // console.log("e harah", e);
-      console.log("jjjj", userId);
-      const res = await axios.delete(
-        "http://localhost:8000/api/v1/purchasecard/deletecart",
-        { data: { userId, cardOneProductId: productId } }
-      );
-      if (res.status === 200) {
-        // setCard(res.data.updatedCard);
-        console.log("backees irsen cart data", res.data.updatedCard);
-      }
-    } catch (error) {
-      console.log("Backend eed card iig ustgahad  aldaa garlaa ", error);
-    }
-  };
-
-  useEffect(() => {
-    getCard();
-  }, [user]);
 
   const amount = card?.map((e) => {
     return e?.product?.price * e?.quantity;
@@ -120,16 +41,12 @@ const Purchase = () => {
   amount?.forEach((num) => {
     sum += num;
   });
-  console.log("card harah", card);
+  // console.log("card harah", card);
   return (
     <div className="  flex flex-col gap-2 justify-center items-center">
       <div className="bg-white rounded-lg p-3 flex flex-col gap-5  w-1/3">
-        <Card
-          card={card}
-          minusCount={minusCount}
-          addCount={addCount}
-          deleteCart={deleteCart}
-        />
+        <Card />
+
         <div className="flex justify-between items-center gap-2 border-t-2 border-dashed pt-3">
           <p>Нийт төлөх дүн:</p>
           <p className="font-bold">{numeral(sum).format("0,0")}₮</p>

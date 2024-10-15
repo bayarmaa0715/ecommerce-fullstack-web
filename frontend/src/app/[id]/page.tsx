@@ -3,25 +3,21 @@
 import { FaHeart, FaRegHeart, FaRegStar } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
 import { useContext, useEffect, useState } from "react";
-import Link from "next/link";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
-import { useParams } from "next/navigation";
 import Count from "@/components/main-section/count";
-import axios from "axios";
-import { toast } from "react-toastify";
 import { UserContext } from "@/context/user";
-
-
+import { CartContext } from "@/context/cart-context";
+import numeral from "numeral";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
-  const { product, like, setLike } = useContext(ProductContext);
+  const { product, likeProduct } = useContext(ProductContext);
   const { user } = useContext(UserContext);
+  const { createCard } = useContext(CartContext);
   const [show, setShow] = useState(false);
-  const { id } = useParams();
-  // console.log("user harah===>", user);
+
   const showComment = () => {
     if (show === true) {
       setShow(false);
@@ -30,39 +26,11 @@ const ProductDetail = () => {
     }
   };
 
-  const likeProduct = () => {
-    if (like === true) {
-      setLike(false);
-    } else {
-      setLike(true);
-    }
-  };
-
-  const createCard = async () => {
-    try {
-      const { id } = useParams();
-
-      // const token = localStorage.getItem("token");
-      const res = await axios.post(
-        "http://localhost:8000/api/v1/purchasecard/createdcard",
-        {
-          productId: id,
-          userId: user
-        }
-      );
-      toast.success("Amjilttai sagsallaa");
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    createCard();
-  }, []);
-
   return (
     <div className="flex flex-col gap-10 px-20 py-10  ">
       <div className=" flex gap-10 justify-center p-5 ">
         <div className="flex flex-col gap-5 pt-20 items-center">
-          {product?.images.map((p) => {
+          {product?.images?.map((p) => {
             return (
               <img
                 src={p}
@@ -74,7 +42,7 @@ const ProductDetail = () => {
         </div>
         <div className="w-[350px] h-full">
           <img
-            src={product?.images[0]}
+            src={product?.images?.[0]}
             alt=""
             className="size-full object-fill h-full rounded-lg obg"
           />
@@ -89,10 +57,10 @@ const ProductDetail = () => {
               className="bg-white hover:bg-white text-black text-2xl "
               onClick={likeProduct}
             >
-              {like === true ? (
+              {product?.isLike === true ? (
                 <FaHeart className="text-red-500" />
               ) : (
-                <FaRegHeart />
+                <FaRegHeart className="" />
               )}
             </Button>
           </div>
@@ -106,7 +74,7 @@ const ProductDetail = () => {
             </ul>
           </div>
           <Count />
-          <p className="font-bold"> {product?.price}$</p>
+          <p className="font-bold">{numeral(product?.price).format("0,0")}₮</p>
           <div>
             {" "}
             <Button
