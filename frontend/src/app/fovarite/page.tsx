@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { FaAngleDown, FaHeart, FaRegHeart } from "react-icons/fa";
 
 const Fovarite = () => {
-  const { products, likeProduct } = useContext(ProductContext);
+  const { products, unlikeProduct, likeProduct } = useContext(ProductContext);
 
   return (
     <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
@@ -34,7 +34,9 @@ const Fovarite = () => {
                         Сагслах
                       </button>
                     </div>{" "}
-                    <FaHeart className="text-black text-2xl" />
+                    <button onClick={() => unlikeProduct(product._id)}>
+                      <FaHeart className="text-black text-2xl" />
+                    </button>
                   </div>
                 </div>
               );
