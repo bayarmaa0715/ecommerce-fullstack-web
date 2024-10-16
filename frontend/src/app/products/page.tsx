@@ -4,9 +4,27 @@ import { ProductContext } from "@/context/product-context";
 import Link from "next/link";
 import numeral from "numeral";
 import { useContext } from "react";
+import { Hearts } from "react-loader-spinner";
 
 const ProductCard = () => {
-  const { products } = useContext(ProductContext);
+  const { products, loading } = useContext(ProductContext);
+
+  if (loading)
+    return (
+      <div className="flex justify-center items-center">
+        {" "}
+        <Hearts
+          height="400"
+          width="400"
+          color="#f32506"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
+
   return (
     <div>
       <div className="relative">

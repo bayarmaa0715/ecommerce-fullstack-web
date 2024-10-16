@@ -2,9 +2,27 @@
 import Baraa from "@/components/main-section/baraa";
 import { CategoryContext } from "@/context/category-context";
 import React, { useContext } from "react";
+import { Hearts } from "react-loader-spinner";
 
 const Kind = () => {
-  const { category } = useContext(CategoryContext);
+  const { category, loading } = useContext(CategoryContext);
+
+  if (loading)
+    return (
+      <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
+        <p className="text-base font-bold">Ангилал</p>
+
+        <Hearts
+          height="400"
+          width="400"
+          color="#f32506"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   return (
     <div className="flex gap-10 px-20 py-10 ">
       <div className="flex flex-col gap-5 w-1/3 ">

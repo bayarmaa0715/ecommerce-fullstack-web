@@ -1,22 +1,33 @@
 "use client";
 
-import { FaHeart, FaRegHeart, FaRegStar } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
 import Count from "@/components/main-section/count";
-import { UserContext } from "@/context/user";
 import { CartContext } from "@/context/cart-context";
 import numeral from "numeral";
+import { Hearts } from "react-loader-spinner";
+import { Rating } from "@smastrom/react-rating";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
-  const { product, likeProduct } = useContext(ProductContext);
-  const { user } = useContext(UserContext);
+  const [rating, setRating] = useState(0);
+  const { product, likeProduct, loading } = useContext(ProductContext);
   const { createCard } = useContext(CartContext);
   const [show, setShow] = useState(false);
+  // const [img, setImg] = useState(false);
+
+  // const showImg = () => {
+  //   if (img === true) {
+  //     setImg(false);
+  //   } else {
+  //     setImg(true);
+  //   }
+  // };
+  // console.log("showImg", img);
 
   const showComment = () => {
     if (show === true) {
@@ -25,6 +36,22 @@ const ProductDetail = () => {
       setShow(true);
     }
   };
+  if (loading)
+    return (
+      <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
+        <p className="text-base font-bold">Бүтээгдэхүүн</p>
+
+        <Hearts
+          height="400"
+          width="400"
+          color="#f32506"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-10 px-20 py-10  ">
@@ -34,6 +61,7 @@ const ProductDetail = () => {
             return (
               <img
                 src={p}
+                // onClick={showImg}
                 alt=""
                 className="w-14 h-14 object-cover size-full rounded-lg"
               />
@@ -95,11 +123,11 @@ const ProductDetail = () => {
               </Button>
             </div>
             <div className=" flex items-center gap-2 text-xl text-yellow-300">
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
-              <FaRegStar />
+              <Rating
+                style={{ maxWidth: 120 }}
+                value={rating}
+                onChange={setRating}
+              />
               <p className="text-black text-lg">4.6</p>
               <p className="text-black text-lg">(24)</p>
             </div>

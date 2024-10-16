@@ -4,32 +4,32 @@ import Card from "@/components/main-section/cart";
 import { useContext } from "react";
 import numeral from "numeral";
 import { CartContext } from "@/context/cart-context";
+import { Hearts } from "react-loader-spinner";
 
 const Purchase = () => {
-  const { card, setCard } = useContext(CartContext);
+  const { card, setCard, cLoading } = useContext(CartContext);
+  if (cLoading)
+    return (
+      <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
+        <p className="text-base font-bold">Ангилал</p>
 
-  const minusCount = () => {
-    // setCard(
-    //   card.map((product) => {
-    //     if (e.product._id === product.product._id) {
-    //       if (e.quantity <= 1) {
-    //         return { ...product, quantity: 1 };
-    //       } else {
-    //         return { ...product, quantity: product.quantity - 1 };
-    //       }
-    //     }
-    //     // return { ...product, quantity: product.quantity - 1};
-    //     // ...[1, 2, 3, 4, 5] => 1, 2, 3, 4, 5
-    //     // ...{key: 'value'} => key: 'value'
-    //     return product;
-    //   })
-    // );
-  };
+        <Hearts
+          height="400"
+          width="400"
+          color="#f34567"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
 
   const amount = card?.map((e) => {
     return e?.product?.price * e?.quantity;
   });
-  // console.log("sumlah tooo", amount);
+  console.log("sumlah tooo", amount);
+  // amount=[11,22,33]
 
   // const sum = amount.reduce((a, b) => {
   //   return a + b;

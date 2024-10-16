@@ -6,6 +6,11 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./user";
 import { toast } from "react-toastify";
 
+interface IComment {
+  userName: string;
+  description: string;
+  rate: number;
+}
 interface IProduct {
   _id: string;
   name: string;
@@ -18,6 +23,13 @@ interface IProduct {
   quantity: number;
   discount: number;
   category: string;
+  comment: [
+    {
+      userName: string;
+      description: string;
+      rate: number;
+    }
+  ];
   // spancol?: string;
   // spanrow?: string;
 }
@@ -29,6 +41,13 @@ interface IProductContext {
   setProduct: React.Dispatch<React.SetStateAction<IProduct>>;
   likeProduct: () => void;
   unlikeProduct: (productId: string) => void;
+  likedProduct: number;
+  loading: boolean;
+  createComment: () => void;
+  rating: number;
+  setRating: React.Dispatch<React.SetStateAction<number>>;
+  description: string;
+  setDescription: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const ProductContext = createContext<IProductContext>({
@@ -38,13 +57,26 @@ export const ProductContext = createContext<IProductContext>({
   setProduct: () => {},
   likeProduct: () => {},
   unlikeProduct: () => {},
+  likedProduct: 0,
+  loading: false,
+  createComment: () => {},
+  rating: 0,
+  setRating: () => {},
+  description: "",
+  setDescription: () => {},
 });
 
 const ProductProvider = ({ children }: { children: React.ReactNode }) => {
+  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [product, setProduct] = useState<IProduct>({} as IProduct);
+  const [rating, setRating] = useState<number>(0);
+  const [description, setDescription] = useState<string>("");
   const { id } = useParams();
   const { user } = useContext(UserContext);
+
+  const likedProduct = products.filter((pro) => pro?.isLike === true).length;
+  console.log("===>", likedProduct);
 
   const likeProduct = async () => {
     if (product?.isLike === true) {
@@ -54,6 +86,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
       setProduct({ ...product, isLike: (product.isLike = true) });
       console.log("true", product.isLike);
     }
+
     try {
       const userId = user?._id;
       if (!user) {
@@ -66,6 +99,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
       });
       console.log("ilgeeh like utga", product.isLike, id, userId);
       if ((data.status = 200)) {
+        await fetchProductData();
         toast.success("Бүтээгдэхүүн таалагдлаа", { autoClose: 500 });
       }
     } catch (error) {
@@ -88,6 +122,8 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if ((data.status = 200)) {
+        await fetchProductData();
+
         toast.success("Бүтээгдэхүүн таалагдахаа болилоо", { autoClose: 500 });
       }
     } catch (error) {
@@ -97,14 +133,17 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchProductData = async () => {
     try {
+      setLoading(true);
+
       const res = await axios.get("http://localhost:8000/api/v1/products");
       if (res.status === 200) {
         setProducts(res.data.allproducts);
-
         // console.log("Product бүх дата харах d", res.data.allproducts);
       }
     } catch (error) {
       console.log("Product бүх дата харахад алдаа гарлаа", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,10 +162,41 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const createComment = async () => {
+    try {
+      const userId = user?._id;
+      const userName = user?.firstname;
+      const productId = id;
+      const res = await axios({
+        method: "post",
+        url: "http://localhost:8000/api/v1/products/createcomment",
+        data: { userId, userName, productId, description, rate: rating },
+      });
+      if (res.status === 200) {
+        await fetchProductData();
+        toast.success("Сэтгэгдэл үлдээсэн таньд баярлалаа", { autoClose: 500 });
+      }
+    } catch (error) {
+      console.log("Сэтгэгдэл үлдээхэд алдаа гарлаа.Та кодоо шалгана уу", error);
+      toast.error("Сэтгэгдэл үлдээхэд алдаа гарлаа. Та дахин оролдоно уу", {
+        autoClose: 500,
+      });
+    }
+  };
+
   useEffect(() => {
+    // if (!products) {
+    //   return;
+    // }
     fetchProductData();
-    getProduct();
   }, []);
+
+  useEffect(() => {
+    // if (!product) {
+    //   return;
+    // }
+    getProduct();
+  }, [id]);
   // console.log("Product бүх дата харах set", products);
   return (
     <ProductContext.Provider
@@ -134,9 +204,16 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
         products,
         setProducts,
         product,
+        loading,
         setProduct,
         likeProduct,
         unlikeProduct,
+        likedProduct,
+        createComment,
+        rating,
+        setRating,
+        description,
+        setDescription,
       }}
     >
       {children}

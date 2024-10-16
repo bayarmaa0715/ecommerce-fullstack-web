@@ -1,13 +1,33 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { CartContext } from "@/context/cart-context";
 import { ProductContext } from "@/context/product-context";
 import numeral from "numeral";
 import { useContext } from "react";
 import { FaAngleDown, FaHeart, FaRegHeart } from "react-icons/fa";
+import { Audio, Hearts } from "react-loader-spinner";
 
 const Fovarite = () => {
-  const { products, unlikeProduct, likeProduct } = useContext(ProductContext);
+  const { products, unlikeProduct, loading } = useContext(ProductContext);
+  const { createCard } = useContext(CartContext);
+
+  if (loading)
+    return (
+      <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
+        <p className="text-base font-bold">Хадгалсан бүтээгдэхүүн</p>
+
+        <Hearts
+          height="400"
+          width="400"
+          color="#f32506"
+          ariaLabel="hearts-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
 
   return (
     <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
@@ -30,7 +50,10 @@ const Fovarite = () => {
                     <div>
                       <p>{product.name}</p>
                       <p>{numeral(product.price).format("0,0")}₮</p>
-                      <button className=" bg-blue-600 rounded-full px-3 py-0 text-white text-sm">
+                      <button
+                        className=" bg-blue-600 rounded-full px-3 py-0 text-white text-sm"
+                        onClick={createCard}
+                      >
                         Сагслах
                       </button>
                     </div>{" "}

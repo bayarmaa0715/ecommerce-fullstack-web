@@ -4,6 +4,7 @@ import PurchaseCard from "../models/purchasecard.model";
 export const createdCard = async (req: Request, res: Response) => {
   // const {id}=req.user
   const { userId, productId, totalAmount, quantity } = req.body;
+
   // console.log("Id=======>", userId, productId, totalAmount, quantity);
   try {
     const findUserCard = await PurchaseCard.findOne({ user: userId });

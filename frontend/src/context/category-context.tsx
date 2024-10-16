@@ -17,16 +17,22 @@ interface ICatagory {
 interface ICatContext {
   category: ICatagory | null;
   setCategory: Dispatch<SetStateAction<ICatagory | null>>;
+  loading: boolean;
 }
 export const CategoryContext = createContext<ICatContext>({
-  category: null,
+  category: { name: "", discription: "" },
   setCategory: () => {},
+  loading: true,
 });
 
 const CategoryProvider = ({ children }: { children: React.ReactNode }) => {
   const [category, setCategory] = useState<ICatagory | null>(null);
+
+  const [loading, setLoading] = useState(true);
+
   const fetchCategoryData = async () => {
     try {
+      setLoading(true);
       const res = await axios.get("http://localhost:8000/api/v1/allcategory");
       if (res.status === 201) {
         setCategory(res.data.category);
@@ -34,6 +40,8 @@ const CategoryProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       console.log("Category харахад алдаа гарлаа", error);
+    } finally {
+      setLoading(false);
     }
   };
   useEffect(() => {
@@ -41,7 +49,7 @@ const CategoryProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
   // console.log("Бүх category харах ", category);
   return (
-    <CategoryContext.Provider value={{ category, setCategory }}>
+    <CategoryContext.Provider value={{ category, setCategory, loading }}>
       {children}
     </CategoryContext.Provider>
   );

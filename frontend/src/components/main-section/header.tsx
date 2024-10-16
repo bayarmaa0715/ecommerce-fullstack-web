@@ -17,7 +17,7 @@ const Header = () => {
   const router = useRouter();
   const { user, token } = useContext(UserContext);
   const { card } = useContext(CartContext);
-
+  const { likedProduct } = useContext(ProductContext);
 
   const signout = () => {
     localStorage.removeItem("token");
@@ -53,7 +53,7 @@ const Header = () => {
         <Link href="fovarite" className="relative">
           <FaHeartBroken className="text-red-500 text-lg relative" />
           <p className="bg-blue-500 rounded-full text-white text-[9px] text-center px-1 py-[0.5px]  absolute top-[-11px] right-[-9px]">
-            {0}
+            {likedProduct}
           </p>
         </Link>
 

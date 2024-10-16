@@ -107,3 +107,34 @@ export const likedProduct = async (req: Request, res: Response) => {
       .json({ message: "Бүтээгдэхүүнд дурлахад алдаа гарлаа", error });
   }
 };
+
+export const createComment = async (req: Request, res: Response) => {
+  const { description, userName, userId, productId, rate } = req.body;
+  // console.log("req body", description, userName, userId, productId, rate);
+  try {
+    const findUser = await User.findOne({ _id: userId });
+    if (!findUser) {
+      console.log("Хэрэглэгч коммент бичихийн тулд нэвтэрнэ үү");
+      res
+        .status(401)
+        .json({ message: "Хэрэглэгч коммент бичихийн тулд нэвтэрнэ үү" });
+    }
+    const findProduct = await Product.findOne({ _id: productId });
+    // console.log("Сэтгэгдэл үлдээх бүтээгдэхүүн ", findProduct);
+    if (!findProduct) {
+      console.log("Сэтгэгдэл үлдээх бүтээгдэхүүн олдсонгүй");
+      res
+        .status(401)
+        .json({ message: "Сэтгэгдэл үлдээх бүтээгдэхүүн олдсонгүй" });
+    }
+    // const createdComment = (
+    //   await Product.create({ userId, productId, description, rate })
+    // ).populate("product");
+    findProduct?.comment.push({ rate, description, userName });
+    const product = await findProduct?.save();
+    res.status(200).json({ message: "Та сэтгэгдэл үлдээлээ", product });
+  } catch (error) {
+    console.log("Сэтгэгдэл үлдээхэд алдаа гарлаа", error);
+    res.status(400).json({ message: "Сэтгэгдэл үлдээхэд алдаа гарлаa", error });
+  }
+};

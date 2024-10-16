@@ -1,5 +1,11 @@
 import { model, Schema } from "mongoose";
 
+interface IComment {
+  userName: string;
+  rate: number;
+  description: string;
+}
+
 interface IProduct {
   name: string;
   discription: string;
@@ -11,6 +17,13 @@ interface IProduct {
   quantity: number;
   discount: number;
   category: Schema.Types.ObjectId;
+  comment: [
+    {
+      userName: string;
+      rate: number;
+      description: string;
+    }
+  ];
 }
 
 const productSchema = new Schema<IProduct>(
@@ -57,7 +70,27 @@ const productSchema = new Schema<IProduct>(
       required: true,
       ref: "Category",
     },
+    comment: [
+      {
+        userName: {
+          type: String,
+          required: false,
+          ref: "User",
+        },
+
+        description: {
+          type: String,
+          required: false,
+        },
+        rate: {
+          type: Number,
+          required: true,
+          default: 0,
+        },
+      },
+    ],
   },
+
   { timestamps: true }
 );
 

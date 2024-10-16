@@ -28,6 +28,7 @@ export interface ICardContext {
   deleteCart: (productId: string) => void;
   updatedQuantity: (productId: string, changedquantity: number) => void;
   createCard: () => void;
+  cLoading: boolean;
 }
 
 export const CartContext = createContext<ICardContext>({
@@ -43,6 +44,7 @@ export const CartContext = createContext<ICardContext>({
   deleteCart: () => {},
   updatedQuantity: () => {},
   createCard: () => {},
+  cLoading: true,
 });
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -54,12 +56,14 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       _id: "",
     },
   ]);
+  const [cLoading, setCLoading] = useState(true);
   const { user } = useContext(UserContext);
   const { product } = useContext(ProductContext);
   const { id } = useParams();
 
   const createCard = async () => {
     try {
+      setCLoading(true);
       const userId = user?._id;
       const totalAmount = product?.price * product?.quantity;
       const quantity = product?.quantity;
@@ -81,15 +85,17 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (res.status === 200) {
+        await getCard();
         return toast.success("Амжиллтай сагслаллаа", {
           autoClose: 100,
           position: "top-center",
         });
         console.log("Amjilttai sagsallaa");
       }
-      toast.success("Amjilttai sagsallaa");
     } catch (error) {
       console.log("Сагсанд бараа нэмэхэд алдаа гарлаа", error);
+    } finally {
+      setCLoading(false);
     }
   };
 
@@ -99,6 +105,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     const userId = user?._id;
     // console.log("userId", userId);
     try {
+      setCLoading(true);
       const res = await axios.get(
         `http://localhost:8000/api/v1/purchasecard/getCart?userId=${userId}`
       );
@@ -109,6 +116,8 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       }
     } catch (error) {
       console.log("Backend eed all card iig harahd aldaa garlaa ", error);
+    } finally {
+      setCLoading(false);
     }
   };
 
@@ -126,6 +135,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
         data: { userId, cardOneProductId: productId },
       });
       if (res.status === 200) {
+        await getCard();
         toast.success("Амжилттай устгалаа", {
           autoClose: 100,
           position: "top-center",
@@ -164,6 +174,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       });
 
       if (update.status === 200) {
+        await getCard();
         toast.success("Амжилттай шинэчлэгдлээ", {
           autoClose: 100,
           position: "top-center",
@@ -180,7 +191,14 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, [user]);
   return (
     <CartContext.Provider
-      value={{ card, setCard, deleteCart, updatedQuantity, createCard }}
+      value={{
+        card,
+        setCard,
+        deleteCart,
+        updatedQuantity,
+        createCard,
+        cLoading,
+      }}
     >
       {children}
     </CartContext.Provider>
