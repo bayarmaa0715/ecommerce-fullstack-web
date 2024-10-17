@@ -39,7 +39,7 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (response.status === 200) {
         setUser(response.data.user);
-        console.log("user ирсэн дата харах", response.data.user);
+        // console.log("user ирсэн дата харах", response.data.user);
       }
     } catch (error) {
       console.error(

@@ -2,7 +2,7 @@
 
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
@@ -11,11 +11,14 @@ import { CartContext } from "@/context/cart-context";
 import numeral from "numeral";
 import { Hearts } from "react-loader-spinner";
 import { Rating } from "@smastrom/react-rating";
+import { useParams } from "next/navigation";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
   const [rating, setRating] = useState(0);
-  const { product, likeProduct, loading } = useContext(ProductContext);
+  const { product, likeProduct, loading, rateSum, rateAvr } =
+    useContext(ProductContext);
+  const { id } = useParams();
   const { createCard } = useContext(CartContext);
   const [show, setShow] = useState(false);
   // const [img, setImg] = useState(false);
@@ -29,6 +32,7 @@ const ProductDetail = () => {
   // };
   // console.log("showImg", img);
 
+  // useEffect(() => {}, [rateSum]);
   const showComment = () => {
     if (show === true) {
       setShow(false);
@@ -128,8 +132,8 @@ const ProductDetail = () => {
                 value={rating}
                 onChange={setRating}
               />
-              <p className="text-black text-lg">4.6</p>
-              <p className="text-black text-lg">(24)</p>
+              <p className="text-black text-lg">{rateAvr}</p>
+              <p className="text-black text-lg">({rateSum})</p>
             </div>
             {show === true ? <Comment /> : <span></span>}
           </div>

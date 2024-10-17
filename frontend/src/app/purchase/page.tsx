@@ -2,7 +2,6 @@
 
 import Card from "@/components/main-section/cart";
 import { useContext } from "react";
-import numeral from "numeral";
 import { CartContext } from "@/context/cart-context";
 import { Hearts } from "react-loader-spinner";
 
@@ -28,7 +27,7 @@ const Purchase = () => {
   const amount = card?.map((e) => {
     return e?.product?.price * e?.quantity;
   });
-  console.log("sumlah tooo", amount);
+  // console.log("sumlah tooo", amount);
   // amount=[11,22,33]
 
   // const sum = amount.reduce((a, b) => {
@@ -49,7 +48,7 @@ const Purchase = () => {
 
         <div className="flex justify-between items-center gap-2 border-t-2 border-dashed pt-3">
           <p>Нийт төлөх дүн:</p>
-          <p className="font-bold">{numeral(sum).format("0,0")}₮</p>
+          <p className="font-bold">{sum.toLocaleString()}₮</p>
         </div>
       </div>
     </div>

@@ -15,7 +15,12 @@ export type IProduct = {
 };
 export type ICard = [
   {
-    product: IProduct;
+    product: {
+      name: string;
+      price: number;
+      images: string[];
+      _id: string;
+    };
     quantity: number;
     totalAmount: number;
     _id: string;
@@ -90,7 +95,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
           autoClose: 100,
           position: "top-center",
         });
-        console.log("Amjilttai sagsallaa");
+        // console.log("Amjilttai sagsallaa");
       }
     } catch (error) {
       console.log("Сагсанд бараа нэмэхэд алдаа гарлаа", error);
@@ -112,7 +117,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       if (res.status === 200) {
         // console.log(res.data.AllCard);
         setCard(res.data.AllCard.products);
-        // console.log("backees irsen cart data", res.data.AllCard[0].products);
+        // console.log("backees irsen cart data", res.data.AllCard);
       }
     } catch (error) {
       console.log("Backend eed all card iig harahd aldaa garlaa ", error);
@@ -140,7 +145,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
           autoClose: 100,
           position: "top-center",
         });
-        console.log("Amjilltai ustgalaa");
+        // console.log("Amjilltai ustgalaa");
       }
     } catch (error) {
       console.log("Backend eed card iig ustgahad  aldaa garlaa ", error);
@@ -165,7 +170,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
       const userId = user?._id;
       //   const productId = e?.product?._id;
       //   const changedquantity = e.quantity;
-      console.log("first", userId, productId, changedquantity);
+      // console.log("first", userId, productId, changedquantity);
       const update = await axios({
         method: "put",
         url: "http://localhost:8000/api/v1/purchasecard/updatedcart",
@@ -179,7 +184,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
           autoClose: 100,
           position: "top-center",
         });
-        console.log("Амжилттай шинэчлэгдлээ");
+        // console.log("Амжилттай шинэчлэгдлээ");
       }
     } catch (error) {
       console.log("Backend дата карт шинэчлэхэд алдаа гарлаа ", error);

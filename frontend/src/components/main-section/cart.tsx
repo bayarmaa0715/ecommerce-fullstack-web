@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
-import numeral from "numeral";
 import { CartContext } from "@/context/cart-context";
 
 const Card = () => {
@@ -53,7 +52,7 @@ const Card = () => {
                   </Button>
                 </div>
 
-                <p>{numeral(e?.product?.price * e?.quantity).format("0,0")}₮</p>
+                <p>{(e?.product?.price * e?.quantity).toLocaleString()}₮</p>
               </div>
               <button onClick={() => deleteCart(e?.product?._id)}>
                 <FaRegTrashAlt />

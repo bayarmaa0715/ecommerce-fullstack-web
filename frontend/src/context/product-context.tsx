@@ -48,6 +48,8 @@ interface IProductContext {
   setRating: React.Dispatch<React.SetStateAction<number>>;
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
+  rateSum: number;
+  rateAvr: string;
 }
 
 export const ProductContext = createContext<IProductContext>({
@@ -64,6 +66,8 @@ export const ProductContext = createContext<IProductContext>({
   setRating: () => {},
   description: "",
   setDescription: () => {},
+  rateSum: 0,
+  rateAvr: "",
 });
 
 const ProductProvider = ({ children }: { children: React.ReactNode }) => {
@@ -74,9 +78,6 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
   const [description, setDescription] = useState<string>("");
   const { id } = useParams();
   const { user } = useContext(UserContext);
-
-  const likedProduct = products.filter((pro) => pro?.isLike === true).length;
-  console.log("===>", likedProduct);
 
   const likeProduct = async () => {
     if (product?.isLike === true) {
@@ -97,7 +98,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
         url: "http://localhost:8000/api/v1/products/likedproduct",
         data: { clickLike: product.isLike, productId: id, userId },
       });
-      console.log("ilgeeh like utga", product.isLike, id, userId);
+      // console.log("ilgeeh like utga", product.isLike, id, userId);
       if ((data.status = 200)) {
         await fetchProductData();
         toast.success("Бүтээгдэхүүн таалагдлаа", { autoClose: 500 });
@@ -111,7 +112,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const userId = user?._id;
 
-      console.log("productId", productId);
+      // console.log("productId", productId);
       if (!user) {
         return;
       }
@@ -130,6 +131,9 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
       console.log("Бүтээгдэхүүн heart дарахад алдаа", error);
     }
   };
+
+  const likedProduct = products.filter((pro) => pro?.isLike === true).length;
+  // console.log("===>", likedProduct);
 
   const fetchProductData = async () => {
     try {
@@ -184,17 +188,17 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const rateSum = product?.comment?.reduce((prev, current) => {
+    return prev + current.rate;
+  }, 0);
+
+  let rateAvr = (rateSum / Math.max(product?.comment?.length, 1)).toFixed(1);
+
   useEffect(() => {
-    // if (!products) {
-    //   return;
-    // }
     fetchProductData();
   }, []);
 
   useEffect(() => {
-    // if (!product) {
-    //   return;
-    // }
     getProduct();
   }, [id]);
   // console.log("Product бүх дата харах set", products);
@@ -214,6 +218,8 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
         setRating,
         description,
         setDescription,
+        rateAvr,
+        rateSum,
       }}
     >
       {children}

@@ -42,25 +42,25 @@ const Comment = () => {
     },
   ];
 
-  let sum = content.reduce(function (prev, current) {
-    return prev + current.score;
-  }, 0);
+  // let sum = content.reduce(function (prev, current) {
+  //   return prev + current.score;
+  // }, 0);
   // console.log(sum / content.length);
-  console.log("products", products);
-  console.log("products", products);
-  let s = products.filter((product) => {
-    if (id === product._id) return product?.comment.length > 0;
-  });
-  let a = s.map((product) => {
-    // return product?.comment?.rate;
-  });
-  let c = a.map((p) => {
-    return p;
-  });
-  // let d=a.reduce((a,b)=>{return a+b.rate},0)
-  console.log("comment bichsen produts monu ", s);
-  console.log("comment array monu a ", a);
-  console.log("comment array monu p ", c);
+  // console.log("products", products);
+
+  // let s = products.filter((product) => {
+  //   if (id === product._id) return product?.comment.length > 0;
+  // });
+  // let a = s.map((product) => {
+  //   return product?.comment;
+  // });
+
+  // let d = a[0].reduce((prevRate, currRate) => {
+  //   return prevRate + currRate.rate;
+  // }, 0);
+  // console.log("comment bichsen produts monu ", s);
+  // console.log("comment array monu a ", a);
+  // console.log("comment array monu p ", d);
 
   return (
     <div className="">
