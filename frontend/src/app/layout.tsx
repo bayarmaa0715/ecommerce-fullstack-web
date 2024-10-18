@@ -9,6 +9,7 @@ import CategoryProvider from "@/context/category-context";
 import ProductProvider from "@/context/product-context";
 import CartProvider from "@/context/cart-context";
 import { ToastContainer } from "react-toastify";
+import { Suspense } from "react";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,7 +42,8 @@ export default function RootLayout({
             <ProductProvider>
               <CartProvider>
                 <Header />
-                {children}
+                <Suspense>{children}</Suspense>
+
                 <Footer />
                 <ToastContainer />
               </CartProvider>
