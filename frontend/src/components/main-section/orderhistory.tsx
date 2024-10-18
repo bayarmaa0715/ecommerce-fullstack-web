@@ -21,6 +21,8 @@ const OrderHistory = () => {
           </div>
           <div className=" flex gap-3 items-center  w-full">
             <Image
+              width={100}
+              height={100}
               src="/images/img1.png"
               alt=""
               className="w-16 h-14 object-cover rounded-lg "

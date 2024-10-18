@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
+
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { ProductContext } from "@/context/product-context";
 import Baraa from "@/components/main-section/baraa";
 import Comment from "@/components/main-section/comment";
@@ -11,7 +11,6 @@ import { CartContext } from "@/context/cart-context";
 import numeral from "numeral";
 import { Hearts } from "react-loader-spinner";
 import { Rating } from "@smastrom/react-rating";
-import { useParams } from "next/navigation";
 import Image from "next/image";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
@@ -52,7 +51,10 @@ const ProductDetail = () => {
         <div className="flex flex-col gap-5 pt-20 items-center">
           {product?.images?.map((p) => {
             return (
-              <img
+              <Image
+                width={100}
+                height={100}
+                key={p}
                 src={p}
                 alt=""
                 className="w-14 h-14 object-cover size-full rounded-lg"
@@ -62,6 +64,8 @@ const ProductDetail = () => {
         </div>
         <div className="w-[350px] h-full">
           <Image
+            width={100}
+            height={100}
             src={product?.images?.[0]}
             alt=""
             className="size-full object-fill h-full rounded-lg obg"
@@ -88,8 +92,10 @@ const ProductDetail = () => {
           <div className=" flex flex-col gap-3">
             <p>Хэмжээ</p>
             <ul className="flex gap-3">
-              {Size.map((size) => (
-                <p className=" border rounded-full px-3"> {size}</p>
+              {Size.map((size, index) => (
+                <p key={`size-${index}`} className=" border rounded-full px-3">
+                  {size}
+                </p>
               ))}
             </ul>
           </div>

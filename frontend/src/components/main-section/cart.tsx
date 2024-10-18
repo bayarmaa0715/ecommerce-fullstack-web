@@ -13,11 +13,13 @@ const Card = () => {
       <div className=" flex justify-between items-center">
         <p className="text-sm font-bold">1.Сагс ({card?.length})</p>
       </div>
-      {card?.map((e) => {
+      {card?.map((e, idx) => {
         return (
-          <div className=" flex gap-3 items-center  w-full">
+          <div key={idx} className=" flex gap-3 items-center  w-full">
             <div className="w-16 h-14">
               <Image
+                width={100}
+                height={100}
                 src={e?.product?.images[0]}
                 alt=""
                 className="w-16 h-14 size-full object-cover rounded-lg "

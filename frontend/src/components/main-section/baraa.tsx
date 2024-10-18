@@ -11,24 +11,28 @@ const Baraa = () => {
 
   return (
     <div className="grid gap-5 grid-cols-4 grid-flow-dense  ">
-      {products?.map((product) => {
+      {products?.map((p1, idx) => {
         return (
-          <Link href={`${product._id}`}>
-            <div className="flex flex-col gap-3 h-full">
-              <Image
-                src={product.images[0]}
-                alt=""
-                className="object-cover size-full rounded-xl"
-              />
-              <div className="flex flex-col items-center ">
-                <p className="text-sm">{product.name}</p>
-                <h1 className="font-bold">
-                  {" "}
-                  {numeral(product.price).format("0,0")}₮
-                </h1>
+          <div key={idx}>
+            <Link href={`${p1._id}`}>
+              <div className="flex flex-col gap-3 h-full">
+                <Image
+                  src={p1.images[0]}
+                  alt=""
+                  width={100}
+                  height={100}
+                  className="object-cover size-full rounded-xl"
+                />
+                <div className="flex flex-col items-center ">
+                  <p className="text-sm">{p1.name}</p>
+                  <h1 className="font-bold">
+                    {" "}
+                    {numeral(p1.price).format("0,0")}₮
+                  </h1>
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
+          </div>
         );
       })}
     </div>

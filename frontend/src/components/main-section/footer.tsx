@@ -14,7 +14,7 @@ const Footer = () => {
       <div className="flex justify-between items-center pb-10">
         <div>
           {" "}
-          <Image src="/images/Vector.png" alt="" />
+          <Image width={100} height={100} src="/images/Vector.png" alt="" />
         </div>
         <div className="flex items-center gap-5 text-gray-400">
           <div className="flex items-center gap-3">

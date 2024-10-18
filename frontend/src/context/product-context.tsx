@@ -25,6 +25,7 @@ interface IProduct {
       rate: number;
     }
   ];
+
   // spancol?: string;
   // spanrow?: string;
 }

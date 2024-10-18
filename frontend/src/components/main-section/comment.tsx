@@ -5,18 +5,11 @@ import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { useContext } from "react";
 import { ProductContext } from "@/context/product-context";
-import { UserContext } from "@/context/user";
 import { useParams } from "next/navigation";
 
 const Comment = () => {
-  const {
-    products,
-    createComment,
-    rating,
-    setRating,
-    setDescription,
-  } = useContext(ProductContext);
-
+  const { products, createComment, rating, setRating, setDescription } =
+    useContext(ProductContext);
 
   const { id } = useParams();
 
@@ -28,7 +21,7 @@ const Comment = () => {
             return (
               <>
                 {product?.comment.map((com) => (
-                  <div className="border-b-2 py-5">
+                  <div key={`com`} className="border-b-2 py-5">
                     {" "}
                     <div className=" flex items-center gap-2 text-xl text-yellow-300">
                       <p className="text-black text-lg">{com?.userName}</p>

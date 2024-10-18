@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import { CartContext } from "@/context/cart-context";
 import { ProductContext } from "@/context/product-context";
@@ -34,12 +35,17 @@ const Fovarite = () => {
       <p className="text-base font-bold">Хадгалсан бүтээгдэхүүн</p>
       {
         <div className=" w-full flex flex-col items-center gap-4">
-          {products.map((product) => {
+          {products.map((product, idx) => {
             if (product.isLike === true)
               return (
-                <div className=" flex gap-3 items-center  w-1/3 bg-white p-5 rounded-lg">
+                <div
+                  key={idx}
+                  className=" flex gap-3 items-center  w-1/3 bg-white p-5 rounded-lg"
+                >
                   <div className="w-28 h-20 ">
                     <Image
+                      width={100}
+                      height={100}
                       src={product.images[2]}
                       alt=""
                       className=" size-full object-cover rounded-lg "

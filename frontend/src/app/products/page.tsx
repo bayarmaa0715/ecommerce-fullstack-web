@@ -33,8 +33,11 @@ const ProductCard = () => {
         <div className="w-full h-[500px]">
           <Image
             src={products[1]?.images[3]}
-            alt=""
-            className="size-full object-cover"
+            alt="g"
+            className="size-full object-cover w-2"
+            fill={true}
+            // width={40}
+            // height={100}
           />
         </div>
 
@@ -48,24 +51,28 @@ const ProductCard = () => {
         </div>
       </div>
       <div className="px-20 py-20 grid gap-5 grid-cols-4 ">
-        {products.map((pro) => {
+        {products.map((prodf, idx) => {
           return (
-            <Link href={`${pro._id}`}>
-              <div className={` flex flex-col mb-10 h-full`}>
-                {/* ${product.span} */}
-                <Image
-                  src={pro.images[0]}
-                  alt=""
-                  className="object-cover size-full rounded-xl"
-                />
-                <div className="flex flex-col items-center ">
-                  <p className="text-sm">{pro.name}</p>
-                  <h1 className="font-bold">
-                    {numeral(pro.price).format("0,0")}₮
-                  </h1>
+            <div key={idx}>
+              <Link href={`${prodf._id}`}>
+                <div className={` flex flex-col mb-10 h-full`}>
+                  {/* ${product.span} */}
+                  <Image
+                    src={prodf.images[0]}
+                    width={100}
+                    height={100}
+                    alt="v"
+                    className="object-cover size-full rounded-xl "
+                  />
+                  <div className="flex flex-col items-center ">
+                    <p className="text-sm">{prodf.name}</p>
+                    <h1 className="font-bold">
+                      {prodf.price.toLocaleString()}₮
+                    </h1>
+                  </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           );
         })}
       </div>

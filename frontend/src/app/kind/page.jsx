@@ -29,9 +29,9 @@ const Kind = () => {
       <div className="flex flex-col gap-5 w-1/3 ">
         <ul className="list-disc pl-6">
           <h1 className="font-bold">Ангилал</h1>
-          {category?.map((type) => {
+          {category?.map((type, key1) => {
             return (
-              <div className="form-control">
+              <div key={key1} className="form-control">
                 <label className="label cursor-pointer flex justify-start gap-4">
                   <input
                     type="radio"

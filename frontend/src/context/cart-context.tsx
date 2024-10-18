@@ -13,23 +13,20 @@ export type IProduct = {
   images: string[];
   _id: string;
 };
-export type ICard = [
-  {
-    product: {
-      name: string;
-      price: number;
-      images: string[];
-      _id: string;
-    };
-    quantity: number;
-    totalAmount: number;
+export type ICard = {
+  product: {
+    name: string;
+    price: number;
+    images: string[];
     _id: string;
-  }
-];
+  };
+  quantity: number;
+  totalAmount: number;
+  _id: string;
+};
 export interface ICardContext {
-  card: ICard;
-
-  setCard: React.Dispatch<React.SetStateAction<ICard>>;
+  card: ICard[];
+  setCard: React.Dispatch<React.SetStateAction<ICard[]>>;
   deleteCart: (productId: string) => void;
   updatedQuantity: (productId: string, changedquantity: number) => void;
   createCard: () => void;
@@ -53,7 +50,7 @@ export const CartContext = createContext<ICardContext>({
 });
 
 const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [card, setCard] = useState<ICard>([
+  const [card, setCard] = useState<ICard[]>([
     {
       product: { name: "", price: 0, images: [], _id: "" },
       quantity: 0,
@@ -155,13 +152,14 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
     productId: string,
     changedquantity: number
   ) => {
-    setCard((prevCart: any) =>
-      prevCart.map((item: any) =>
+    setCard((prevCart) =>
+      prevCart.map((item) =>
         item.product._id === productId
           ? { ...item, quantity: changedquantity }
           : item
       )
     );
+
     try {
       if (!user) {
         return;
@@ -194,6 +192,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     getCard();
   }, [user?._id]);
+
   return (
     <CartContext.Provider
       value={{
