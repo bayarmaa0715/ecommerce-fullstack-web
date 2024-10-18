@@ -1,8 +1,10 @@
 "use client";
+import React from "react";
 import { ProductContext } from "@/context/product-context";
 import Link from "next/link";
 import numeral from "numeral";
 import { useContext } from "react";
+import Image from "next/image";
 
 const Baraa = () => {
   const { products } = useContext(ProductContext);
@@ -13,7 +15,7 @@ const Baraa = () => {
         return (
           <Link href={`${product._id}`}>
             <div className="flex flex-col gap-3 h-full">
-              <img
+              <Image
                 src={product.images[0]}
                 alt=""
                 className="object-cover size-full rounded-xl"

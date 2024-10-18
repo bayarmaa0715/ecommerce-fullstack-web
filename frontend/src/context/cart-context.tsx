@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./user";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -193,7 +193,7 @@ const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     getCard();
-  }, [user]);
+  }, [user?._id]);
   return (
     <CartContext.Provider
       value={{

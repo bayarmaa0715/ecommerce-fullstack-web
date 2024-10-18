@@ -1,12 +1,12 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
+import React from "react";
 import { CartContext } from "@/context/cart-context";
 import { ProductContext } from "@/context/product-context";
+import Image from "next/image";
 import numeral from "numeral";
 import { useContext } from "react";
-import { FaAngleDown, FaHeart, FaRegHeart } from "react-icons/fa";
-import { Audio, Hearts } from "react-loader-spinner";
+import { FaHeart } from "react-icons/fa";
+import { Hearts } from "react-loader-spinner";
 
 const Fovarite = () => {
   const { products, unlikeProduct, loading } = useContext(ProductContext);
@@ -39,7 +39,7 @@ const Fovarite = () => {
               return (
                 <div className=" flex gap-3 items-center  w-1/3 bg-white p-5 rounded-lg">
                   <div className="w-28 h-20 ">
-                    <img
+                    <Image
                       src={product.images[2]}
                       alt=""
                       className=" size-full object-cover rounded-lg "

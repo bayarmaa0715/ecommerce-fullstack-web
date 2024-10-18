@@ -7,13 +7,14 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
+import Image from "next/image";
 const Footer = () => {
   return (
     <div className="bg-black text-white py-12 px-28 ">
       <div className="flex justify-between items-center pb-10">
         <div>
           {" "}
-          <img src="/images/Vector.png" alt="" />
+          <Image src="/images/Vector.png" alt="" />
         </div>
         <div className="flex items-center gap-5 text-gray-400">
           <div className="flex items-center gap-3">

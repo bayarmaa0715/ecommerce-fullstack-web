@@ -1,4 +1,6 @@
 "use client";
+
+import Image from "next/image";
 import { FaAngleDown } from "react-icons/fa";
 
 const OrderHistory = () => {
@@ -18,7 +20,7 @@ const OrderHistory = () => {
             <FaAngleDown />
           </div>
           <div className=" flex gap-3 items-center  w-full">
-            <img
+            <Image
               src="/images/img1.png"
               alt=""
               className="w-16 h-14 object-cover rounded-lg "

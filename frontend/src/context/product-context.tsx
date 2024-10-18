@@ -2,15 +2,10 @@
 
 import axios from "axios";
 import { useParams } from "next/navigation";
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./user";
 import { toast } from "react-toastify";
 
-interface IComment {
-  userName: string;
-  description: string;
-  rate: number;
-}
 interface IProduct {
   _id: string;
   name: string;
@@ -192,7 +187,7 @@ const ProductProvider = ({ children }: { children: React.ReactNode }) => {
     return prev + current.rate;
   }, 0);
 
-  let rateAvr = (rateSum / Math.max(product?.comment?.length, 1)).toFixed(1);
+  const rateAvr = (rateSum / Math.max(product?.comment?.length, 1)).toFixed(1);
 
   useEffect(() => {
     fetchProductData();

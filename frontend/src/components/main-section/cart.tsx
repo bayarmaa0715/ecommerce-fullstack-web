@@ -1,13 +1,12 @@
 "use client";
 import React, { useContext } from "react";
-
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
 import { CartContext } from "@/context/cart-context";
+import Image from "next/image";
 
 const Card = () => {
-  const { card, setCard, updatedQuantity, deleteCart } =
-    useContext(CartContext);
+  const { card, updatedQuantity, deleteCart } = useContext(CartContext);
 
   return (
     <div className="flex flex-col gap-4">
@@ -18,7 +17,7 @@ const Card = () => {
         return (
           <div className=" flex gap-3 items-center  w-full">
             <div className="w-16 h-14">
-              <img
+              <Image
                 src={e?.product?.images[0]}
                 alt=""
                 className="w-16 h-14 size-full object-cover rounded-lg "

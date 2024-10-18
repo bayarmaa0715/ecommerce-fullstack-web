@@ -4,9 +4,10 @@ import Card from "@/components/main-section/cart";
 import { useContext } from "react";
 import { CartContext } from "@/context/cart-context";
 import { Hearts } from "react-loader-spinner";
+import React from "react";
 
 const Purchase = () => {
-  const { card, setCard, cLoading } = useContext(CartContext);
+  const { card, cLoading } = useContext(CartContext);
   if (cLoading)
     return (
       <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">

@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Input } from "../ui/input";
 import { IoSearch } from "react-icons/io5";
 import { FaHeartBroken } from "react-icons/fa";
@@ -12,6 +12,7 @@ import { CiPower } from "react-icons/ci";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/context/cart-context";
 import { ProductContext } from "@/context/product-context";
+import Image from "next/image";
 
 const Header = () => {
   const router = useRouter();
@@ -23,15 +24,13 @@ const Header = () => {
     localStorage.removeItem("token");
     router.push("/");
   };
-  // useEffect(() => {
 
-  // }, []);
   return (
     <div className="bg-black flex justify-between items-center py-3 px-3">
       <div className="flex gap-3">
         <Link href="/products">
           {" "}
-          <img src="/images/Vector.png" alt="" />
+          <Image src="/images/Vector.png" alt="" />
         </Link>
 
         <Link href="/products" className="text-white font-extrabold">

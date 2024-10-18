@@ -3,6 +3,7 @@ import Baraa from "@/components/main-section/baraa";
 import { CategoryContext } from "@/context/category-context";
 import React, { useContext } from "react";
 import { Hearts } from "react-loader-spinner";
+import React from "react";
 
 const Kind = () => {
   const { category, loading } = useContext(CategoryContext);

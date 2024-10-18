@@ -5,6 +5,8 @@ import Link from "next/link";
 import numeral from "numeral";
 import { useContext } from "react";
 import { Hearts } from "react-loader-spinner";
+import React from "react";
+import Image from "next/image";
 
 const ProductCard = () => {
   const { products, loading } = useContext(ProductContext);
@@ -29,7 +31,7 @@ const ProductCard = () => {
     <div>
       <div className="relative">
         <div className="w-full h-[500px]">
-          <img
+          <Image
             src={products[1]?.images[3]}
             alt=""
             className="size-full object-cover"
@@ -51,7 +53,7 @@ const ProductCard = () => {
             <Link href={`${pro._id}`}>
               <div className={` flex flex-col mb-10 h-full`}>
                 {/* ${product.span} */}
-                <img
+                <Image
                   src={pro.images[0]}
                   alt=""
                   className="object-cover size-full rounded-xl"

@@ -1,30 +1,11 @@
 "use client";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button } from "../ui/button";
 import { ProductContext } from "@/context/product-context";
 
 const Count = () => {
-  interface IProduct {
-    _id: string;
-    name: string;
-    discription: string;
-    price: number;
-    size: string;
-    images: [string];
-    isNew: boolean;
-    quantity: number;
-    discount: number;
-    category: string;
-    // spancol?: string;
-    // spanrow?: string;
-  }
-
-  // const [] = use
-
   const { product, setProduct } = useContext(ProductContext);
   const AddCountFunction = () => {
-    // return setProduct(product);
-    // if (product)
     return setProduct({ ...product, quantity: product?.quantity + 1 });
   };
   const MinusCountFunction = () => {

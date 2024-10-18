@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Button } from "../../components/ui/button";
 import { useContext, useEffect, useState } from "react";
@@ -12,27 +12,16 @@ import numeral from "numeral";
 import { Hearts } from "react-loader-spinner";
 import { Rating } from "@smastrom/react-rating";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 const Size = ["Free", "S", "M", "L", "XL", "2XL", "3XL"];
 const ProductDetail = () => {
   const [rating, setRating] = useState(0);
   const { product, likeProduct, loading, rateSum, rateAvr } =
     useContext(ProductContext);
-  const { id } = useParams();
   const { createCard } = useContext(CartContext);
   const [show, setShow] = useState(false);
-  // const [img, setImg] = useState(false);
 
-  // const showImg = () => {
-  //   if (img === true) {
-  //     setImg(false);
-  //   } else {
-  //     setImg(true);
-  //   }
-  // };
-  // console.log("showImg", img);
-
-  // useEffect(() => {}, [rateSum]);
   const showComment = () => {
     if (show === true) {
       setShow(false);
@@ -65,7 +54,6 @@ const ProductDetail = () => {
             return (
               <img
                 src={p}
-                // onClick={showImg}
                 alt=""
                 className="w-14 h-14 object-cover size-full rounded-lg"
               />
@@ -73,7 +61,7 @@ const ProductDetail = () => {
           })}
         </div>
         <div className="w-[350px] h-full">
-          <img
+          <Image
             src={product?.images?.[0]}
             alt=""
             className="size-full object-fill h-full rounded-lg obg"
