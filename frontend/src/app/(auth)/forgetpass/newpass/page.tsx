@@ -1,10 +1,11 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
 import React, { useState } from "react";
-// import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { Button } from "@/components/ui/button";
+// import { Suspense } from "react";
 
 const NewPassPage = () => {
   const router = useRouter();
@@ -68,3 +69,11 @@ const NewPassPage = () => {
 };
 
 export default NewPassPage;
+// export const Searchbar = () => {
+//   return (
+//     // You could have a loading skeleton as the `fallback` too
+//     <Suspense>
+//       <NewPassPage />
+//     </Suspense>
+//   );
+// };

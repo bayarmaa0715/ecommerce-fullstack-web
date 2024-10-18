@@ -28,19 +28,24 @@ const Purchase = () => {
   const amount = card?.map((e) => {
     return e?.product?.price * e?.quantity;
   });
+  // [666,66,77]
+
+  let sum = 0;
+  amount?.forEach((num) => {
+    sum += num;
+  });
+
   // console.log("sumlah tooo", amount);
   // amount=[11,22,33]
 
   // const sum = amount.reduce((a, b) => {
   //   return a + b;
   // });
-  let sum = 0;
+
   // for (let i = 0; i < amount.length; i++) {
   //   sum += amount[i];
   // }
-  amount?.forEach((num) => {
-    sum += num;
-  });
+
   // console.log("card harah", card);
   return (
     <div className="  flex flex-col gap-2 justify-center items-center">
