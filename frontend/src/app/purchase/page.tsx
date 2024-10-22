@@ -19,7 +19,6 @@ const Purchase = () => {
           color="#f34567"
           ariaLabel="hearts-loading"
           wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       </div>

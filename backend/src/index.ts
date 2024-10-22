@@ -7,7 +7,7 @@ import productRoute from "./routes/product-router";
 import purchaseCardRoute from "./routes/purchasecard-route";
 
 import cors from "cors";
-import { sendEmail } from "./utils/sendEmail";
+// import { sendEmail } from "./utils/sendEmail";
 
 dotenv.config();
 const PORT: string = process.env.PORT || "port error";

@@ -19,7 +19,6 @@ const Kind = () => {
           color="#f32506"
           ariaLabel="hearts-loading"
           wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       </div>

@@ -21,8 +21,8 @@ const Card = () => {
                 width={100}
                 height={100}
                 src={e?.product?.images[0]}
-                alt=""
-                className="w-16 h-14 size-full object-cover rounded-lg "
+                alt="Photo"
+                className=" size-full object-cover rounded-lg "
               />
             </div>
 

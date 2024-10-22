@@ -32,46 +32,47 @@ const ProductDetail = () => {
     return (
       <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
         <p className="text-base font-bold">Бүтээгдэхүүн</p>
-
         <Hearts
           height="400"
           width="400"
           color="#f32506"
           ariaLabel="hearts-loading"
           wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       </div>
     );
 
   return (
-    <div className="flex flex-col gap-10 px-20 py-10  ">
-      <div className=" flex gap-10 justify-center p-5 ">
-        <div className="flex flex-col gap-5 pt-20 items-center">
-          {product?.images?.map((p) => {
-            return (
-              <Image
-                width={100}
-                height={100}
-                key={p}
-                src={p}
-                alt=""
-                className="w-14 h-14 object-cover size-full rounded-lg"
-              />
-            );
-          })}
+    <div className="flex flex-col px-20 py-10  ">
+      <div className=" flex gap-1 justify-center w-full h-1/3">
+        <div className="flex gap-5 w-2/3 ">
+          <div className="flex flex-col gap-5 justify-center items-center h-full ">
+            {product?.images?.map((p, index) => {
+              return (
+                <Image
+                  key={`img ${index} `}
+                  width={100}
+                  height={100}
+                  src={p}
+                  alt="Photo"
+                  className="object-cover  rounded-lg w-20 h-20 "
+                />
+              );
+            })}
+          </div>
+          <div className="w-2/3 h-full">
+            <Image
+              width={400}
+              height={400}
+              src={product?.images?.[0]}
+              alt="Photo"
+              className="size-full object-cover w-full h-full rounded-lg "
+            />
+          </div>
         </div>
-        <div className="w-[350px] h-full">
-          <Image
-            width={100}
-            height={100}
-            src={product?.images?.[0]}
-            alt=""
-            className="size-full object-fill h-full rounded-lg obg"
-          />
-        </div>
-        <div className="flex flex-col gap-5">
+
+        <div className="flex flex-col gap-5 w-1/3 h-full">
           <div className="flex ">
             <p className="border border-blue-600 rounded-md px-2">Шинэ</p>
           </div>
@@ -84,7 +85,7 @@ const ProductDetail = () => {
               {product?.isLike === true ? (
                 <FaHeart className="text-red-500" />
               ) : (
-                <FaRegHeart className="" />
+                <FaRegHeart />
               )}
             </Button>
           </div>
@@ -102,7 +103,6 @@ const ProductDetail = () => {
           <Count />
           <p className="font-bold">{numeral(product?.price).format("0,0")}₮</p>
           <div>
-            {" "}
             <Button
               className="bg-blue-700 px-10 rounded-full"
               onClick={createCard}
@@ -129,8 +129,12 @@ const ProductDetail = () => {
               <p className="text-black text-lg">{rateAvr}</p>
               <p className="text-black text-lg">({rateSum})</p>
             </div>
-            {show === true ? <Comment /> : <span></span>}
           </div>
+        </div>
+      </div>
+      <div className="flex justify-end">
+        <div className="w-1/3">
+          {show === true ? <Comment /> : <span></span>}
         </div>
       </div>
       <Baraa />

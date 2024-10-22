@@ -12,7 +12,7 @@ interface IProduct {
   price: number;
   size: string;
   images: string[];
-  isNew: boolean;
+  isNeww: boolean;
   isLike: boolean;
   quantity: number;
   discount: number;
@@ -49,9 +49,9 @@ const productSchema = new Schema<IProduct>(
       type: [String],
       default: ["img"],
     },
-    isNew: {
+    isNeww: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     isLike: {
       type: Boolean,

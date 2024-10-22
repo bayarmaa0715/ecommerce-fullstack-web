@@ -10,7 +10,7 @@ const SearchComp = () => {
           width={100}
           height={100}
           src="/images/image (7).png"
-          alt=""
+          alt="Photo"
           className="size-full rounded-xl"
         />
       </div>

@@ -24,7 +24,6 @@ const Fovarite = () => {
           color="#f32506"
           ariaLabel="hearts-loading"
           wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       </div>
@@ -47,7 +46,7 @@ const Fovarite = () => {
                       width={100}
                       height={100}
                       src={product.images[2]}
-                      alt=""
+                      alt="Photo"
                       className=" size-full object-cover rounded-lg "
                     />
                   </div>

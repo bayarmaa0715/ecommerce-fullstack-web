@@ -14,14 +14,12 @@ const ProductCard = () => {
   if (loading)
     return (
       <div className="flex justify-center items-center">
-        {" "}
         <Hearts
           height="400"
           width="400"
           color="#f32506"
           ariaLabel="hearts-loading"
           wrapperStyle={{}}
-          wrapperClass=""
           visible={true}
         />
       </div>
@@ -36,16 +34,12 @@ const ProductCard = () => {
             alt="g"
             className="size-full object-cover w-2"
             fill={true}
-            // width={40}
-            // height={100}
           />
         </div>
 
         <div className="absolute left-1/4 bottom-1/4  ">
-          {" "}
           <p>{products[1]?.name}</p>
           <p className="font-bold">
-            {" "}
             {numeral(products[1]?.price).format("0,0")}₮
           </p>
         </div>

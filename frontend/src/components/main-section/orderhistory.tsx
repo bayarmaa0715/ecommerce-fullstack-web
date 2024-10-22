@@ -11,10 +11,10 @@ const OrderHistory = () => {
         <div className="flex flex-col gap-4">
           <div className=" flex justify-between items-center">
             <p className="text-sm font-bold">
-              2023-12-12 15:23{" "}
+              2023-12-12 15:23
               <span className="bg-blue-600 rounded-full py-1 px-2 text-white text-sm">
                 хүргэлтэнд гарсан
-              </span>{" "}
+              </span>
             </p>
 
             <FaAngleDown />
@@ -24,7 +24,7 @@ const OrderHistory = () => {
               width={100}
               height={100}
               src="/images/img1.png"
-              alt=""
+              alt="Photo"
               className="w-16 h-14 object-cover rounded-lg "
             />
             <div className="flex justify-between  gap-2 items-center w-full">
