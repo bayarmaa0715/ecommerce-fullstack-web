@@ -41,13 +41,13 @@ const Fovarite = () => {
                   key={idx}
                   className=" flex gap-3 items-center  w-1/3 bg-white p-5 rounded-lg"
                 >
-                  <div className="w-28 h-20 ">
+                  <div className="w-28 h-20  relative">
                     <Image
-                      width={100}
-                      height={100}
+                      priority
+                      layout="fill"
                       src={product.images[2]}
                       alt="Photo"
-                      className=" size-full object-cover rounded-lg "
+                      className=" size-full object-cover rounded-lg  w-auto h-auto "
                     />
                   </div>
 

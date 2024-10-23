@@ -49,25 +49,29 @@ const ProductDetail = () => {
         <div className="flex gap-5 w-2/3 ">
           <div className="flex flex-col gap-5 justify-center items-center h-full ">
             {product?.images?.map((p, index) => {
+              console.log(p);
               return (
-                <Image
-                  key={`img ${index} `}
-                  width={100}
-                  height={100}
-                  src={p}
-                  alt="Photo"
-                  className="object-cover  rounded-lg w-20 h-20 "
-                />
+                <div key={`img ${index} `} className="w-20 h-20 relative">
+                  <Image
+                    fill={true}
+                    priority
+                    sizes="w-auto h-auto"
+                    src={p}
+                    alt="Photo"
+                    className="object-cover  rounded-lg  w-auto h-auto"
+                  />
+                </div>
               );
             })}
           </div>
-          <div className="w-2/3 h-full">
+          <div className="w-2/3 h-full relative">
             <Image
-              width={400}
-              height={400}
+              fill={true}
+              priority
+              sizes="w-auto h-auto"
               src={product?.images?.[0]}
               alt="Photo"
-              className="size-full object-cover w-full h-full rounded-lg "
+              className="size-full object-cover w-auto h-auto rounded-lg "
             />
           </div>
         </div>

@@ -12,12 +12,14 @@ const Footer = () => {
   return (
     <div className="bg-black text-white py-12 px-28 ">
       <div className="flex justify-between items-center pb-10">
-        <div>
+        <div className="w-8 h-8 relative">
           <Image
-            width={100}
-            height={100}
+            fill={true}
+            sizes="w-auto h-auto"
             src="/images/Vector.png"
             alt="Photo"
+            className="w-auto h-auto"
+            priority
           />
         </div>
         <div className="flex items-center gap-5 text-gray-400">

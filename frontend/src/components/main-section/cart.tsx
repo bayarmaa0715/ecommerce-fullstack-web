@@ -16,13 +16,14 @@ const Card = () => {
       {card?.map((e, idx) => {
         return (
           <div key={idx} className=" flex gap-3 items-center  w-full">
-            <div className="w-16 h-14">
+            <div className="w-28 h-20 relative">
               <Image
-                width={100}
-                height={100}
+                fill={true}
+                priority
+                sizes="w-auto h-auto"
                 src={e?.product?.images[0]}
                 alt="Photo"
-                className=" size-full object-cover rounded-lg "
+                className=" size-full object-cover rounded-lg w-auto h-auto "
               />
             </div>
 

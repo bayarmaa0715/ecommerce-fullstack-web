@@ -5,13 +5,14 @@ import Image from "next/image";
 const SearchComp = () => {
   return (
     <div className="flex items-center gap-4 ">
-      <div className="w-14 h-14 ">
+      <div className="w-14 h-14n relative ">
         <Image
-          width={100}
-          height={100}
+          fill={true}
+          sizes="w-auto h-auto"
           src="/images/image (7).png"
           alt="Photo"
-          className="size-full rounded-xl"
+          // className="size-full rounded-xl w-auto h-auto"
+          priority
         />
       </div>
       <div>

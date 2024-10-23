@@ -15,20 +15,21 @@ const Baraa = () => {
         return (
           <div key={idx}>
             <Link href={`${p1._id}`}>
-              <div className="flex flex-col gap-3 h-full">
+              <div className="flex flex-col gap-3 relative w-5/5 h-[300px]">
                 <Image
+                  fill={true}
+                  priority
+                  sizes="w-auto h-auto"
                   src={p1.images[0]}
                   alt="Photo"
-                  width={100}
-                  height={100}
-                  className="object-cover size-full rounded-xl"
+                  className="object-cover size-full rounded-xl w-auto h-auto"
                 />
-                <div className="flex flex-col items-center ">
-                  <p className="text-sm">{p1.name}</p>
-                  <h1 className="font-bold">
-                    {numeral(p1.price).format("0,0")}₮
-                  </h1>
-                </div>
+              </div>
+              <div className="flex flex-col items-center ">
+                <p className="text-sm">{p1.name}</p>
+                <h1 className="font-bold">
+                  {numeral(p1.price).format("0,0")}₮
+                </h1>
               </div>
             </Link>
           </div>

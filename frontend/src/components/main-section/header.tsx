@@ -28,9 +28,14 @@ const Header = () => {
   return (
     <div className="bg-black flex justify-between items-center py-3 px-3">
       <div className="flex gap-3">
-        <Link href="/products">
-          {" "}
-          <Image src="/images/Vector.png" alt="Photo" width={40} height={40} />
+        <Link href="/products" className="w-8 h-8 relative">
+          <Image
+            fill={true}
+            src="/images/Vector.png"
+            alt="Photo"
+            sizes="w-auto h-auto"
+            priority
+          />
         </Link>
 
         <Link href="/products" className="text-white font-extrabold">

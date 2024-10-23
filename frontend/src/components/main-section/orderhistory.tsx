@@ -20,13 +20,17 @@ const OrderHistory = () => {
             <FaAngleDown />
           </div>
           <div className=" flex gap-3 items-center  w-full">
-            <Image
-              width={100}
-              height={100}
-              src="/images/img1.png"
-              alt="Photo"
-              className="w-16 h-14 object-cover rounded-lg "
-            />
+            <div className=" w-16 h-14  relative">
+              <Image
+                fill={true}
+                src="/images/img1.png"
+                alt="Photo"
+                sizes="w-auto h-auto"
+                className="w-auto h-auto object-cover rounded-lg "
+                priority
+              />
+            </div>
+
             <div className="flex justify-between  gap-2 items-center w-full">
               <div>
                 <p>Chunky Olimp Tee</p>

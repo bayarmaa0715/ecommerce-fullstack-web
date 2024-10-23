@@ -28,12 +28,14 @@ const ProductCard = () => {
   return (
     <div>
       <div className="relative">
-        <div className="w-full h-[500px]">
+        <div className="w-full h-[500px] relative">
           <Image
-            src={products[1]?.images[3]}
-            alt="g"
-            className="size-full object-cover w-2"
             fill={true}
+            sizes="w-auto h-auto"
+            src={products[1]?.images[3]}
+            alt="Photo"
+            className="object-cover w-auto h-auto"
+            priority
           />
         </div>
 
@@ -48,22 +50,21 @@ const ProductCard = () => {
         {products.map((prodf, idx) => {
           return (
             <div key={idx}>
-              <Link href={`${prodf._id}`}>
-                <div className={` flex flex-col mb-10 h-full`}>
+              <Link href={`${prodf._id}`} className="flex flex-col gap-2">
+                <div className={` flex flex-col h-[300px] relative`}>
                   {/* ${product.span} */}
                   <Image
+                    fill={true}
+                    sizes="w-auto h-auto"
                     src={prodf.images[0]}
-                    width={100}
-                    height={100}
-                    alt="v"
-                    className="object-cover size-full rounded-xl "
+                    alt="Photo"
+                    priority
+                    className="object-cover rounded-xl w-auto h-auto"
                   />
-                  <div className="flex flex-col items-center ">
-                    <p className="text-sm">{prodf.name}</p>
-                    <h1 className="font-bold">
-                      {prodf.price.toLocaleString()}₮
-                    </h1>
-                  </div>
+                </div>
+                <div className="flex flex-col items-center ">
+                  <p className="text-sm">{prodf.name}</p>
+                  <h1 className="font-bold">{prodf.price.toLocaleString()}₮</h1>
                 </div>
               </Link>
             </div>
