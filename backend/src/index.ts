@@ -24,15 +24,17 @@ app.use("/api/v1/products", productRoute);
 app.use("/api/v1/purchasecard", purchaseCardRoute);
 
 app.get("/", async (req: Request, res: Response) => {
-  const randomOTP = Math.floor(Math.random() * 10000)
-    .toString()
-    .padStart(4, "0");
-  console.log("too", randomOTP);
-  const sendEMAIL = "oojgii0118@gmail.com";
+  // const randomOTP = Math.floor(Math.random() * 10000)
+  //   .toString()
+  //   .padStart(4, "0");
+  // console.log("too", randomOTP);
+  // const sendEMAIL = "oojgii0118@gmail.com";
   // sendEmail(sendEMAIL, randomOTP);
   res.send("Welcome ecommerce api server");
 });
+
 connectDB(MONGO_URI);
+
 app.listen(PORT, () => {
   console.log(`Server localhost ${PORT} аслаа aa`);
 });

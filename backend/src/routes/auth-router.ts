@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  allUser,
   currentUser,
   forgetPassword,
   login,
@@ -11,6 +12,7 @@ import { auth } from "../middlewares/auth";
 const router = Router();
 
 router.route("/currentUser").get(auth, currentUser);
+router.route("/user").get(allUser);
 router.route("/verify-password").post(verifyPassword);
 router.route("/forget-password").post(forgetPassword);
 router.route("/verify-otp").post(verifyOtp);

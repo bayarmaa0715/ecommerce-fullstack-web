@@ -11,7 +11,7 @@ const SearchComp = () => {
           sizes="w-auto h-auto"
           src="/images/image (7).png"
           alt="Photo"
-          // className="size-full rounded-xl w-auto h-auto"
+          className=" w-auto h-auto"
           priority
         />
       </div>

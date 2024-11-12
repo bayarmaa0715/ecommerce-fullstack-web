@@ -47,7 +47,7 @@ const Purchase = () => {
 
   // console.log("card harah", card);
   return (
-    <div className="  flex flex-col gap-2 justify-center items-center">
+    <div className="  flex flex-col gap-2 items-center h-[75vh]">
       <div className="bg-white rounded-lg p-3 flex flex-col gap-5  w-1/3">
         <Card />
 

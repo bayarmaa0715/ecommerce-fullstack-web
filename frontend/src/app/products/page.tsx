@@ -32,7 +32,7 @@ const ProductCard = () => {
           <Image
             fill={true}
             sizes="w-auto h-auto"
-            src={products[1]?.images[3]}
+            src="https://img.freepik.com/premium-photo/fashionable-youth-clothes-background_925613-32311.jpg?semt=ais_hybrid"
             alt="Photo"
             className="object-cover w-auto h-auto"
             priority
@@ -40,7 +40,7 @@ const ProductCard = () => {
         </div>
 
         <div className="absolute left-1/4 bottom-1/4  ">
-          <p>{products[1]?.name}</p>
+          <p>Hat</p>
           <p className="font-bold">
             {numeral(products[1]?.price).format("0,0")}₮
           </p>

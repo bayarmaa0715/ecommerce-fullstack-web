@@ -44,11 +44,25 @@ export const login = async (req: Request, res: Response) => {
     res.status(400).json({ message: "User newtrehed aldaa garlaa", error });
   }
 };
+
 export const currentUser = async (req: Request, res: Response) => {
   try {
     const { id } = req.user;
     console.log("id ?", id);
     const finUser = await User.findById(id);
+    res.status(200).json({ message: "Success user", user: finUser });
+  } catch (error) {
+    console.log("current user erro", error);
+    res.status(400).json({
+      message: "Newtersen hereglegciin medeell tatahad aldaa garlaa",
+      error,
+    });
+  }
+};
+
+export const allUser = async (req: Request, res: Response) => {
+  try {
+    const finUser = await User.find({});
     res.status(200).json({ message: "Success user", user: finUser });
   } catch (error) {
     console.log("current user erro", error);

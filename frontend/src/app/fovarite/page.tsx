@@ -30,7 +30,7 @@ const Fovarite = () => {
     );
 
   return (
-    <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 ">
+    <div className="flex flex-col gap-4 items-center bg-gray-100 p-10 h-[75vh]">
       <p className="text-base font-bold">Хадгалсан бүтээгдэхүүн</p>
       {
         <div className=" w-full flex flex-col items-center gap-4">
