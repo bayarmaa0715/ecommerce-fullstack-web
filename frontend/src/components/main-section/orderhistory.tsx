@@ -5,7 +5,7 @@ import { FaAngleDown } from "react-icons/fa";
 
 const OrderHistory = () => {
   return (
-    <div className=" w-2/5 flex flex-col gap-2 ">
+    <div className=" flex flex-col gap-2 ">
       <p className="text-base font-bold">Захиалгын түүх</p>
       <div className="bg-white rounded-lg p-3 flex flex-col gap-5">
         <div className="flex flex-col gap-4">

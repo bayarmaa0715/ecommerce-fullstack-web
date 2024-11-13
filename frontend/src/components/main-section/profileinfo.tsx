@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 
 const ProfileInfo = () => {
   return (
-    <div className="w-2/5 flex flex-col gap-2">
+    <div className="w-3/5 flex flex-col gap-2">
       <p className="text-base font-bold">Хэрэглэгчийн хэсэг</p>
       <p>Овог:</p>
       <input type="text" className="rounded-full w-full" />
       <p>Нэр:</p>
       <input type="text" className="rounded-full w-full" />
-      <p>Утасны дугаар:</p>
+      <h1>Утасны дугаар:</h1>
       <input type="text" className="rounded-full w-full" />
       <p>Имэйл хаяг:</p>
       <input type="text" className="rounded-full w-full" />
